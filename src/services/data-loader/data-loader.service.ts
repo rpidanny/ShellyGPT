@@ -5,6 +5,7 @@ import { DocxLoader } from 'langchain/document_loaders/fs/docx';
 import { EPubLoader } from 'langchain/document_loaders/fs/epub';
 import { JSONLoader } from 'langchain/document_loaders/fs/json';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
+import { SRTLoader } from 'langchain/document_loaders/fs/srt';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
 import { TokenTextSplitter } from 'langchain/text_splitter';
 
@@ -19,6 +20,7 @@ export class DataLoaderService {
     '.docx': (path: string) => new DocxLoader(path),
     '.epub': (path: string) => new EPubLoader(path),
     '.pdf': (path: string) => new PDFLoader(path),
+    '.srt': (path: string) => new SRTLoader(path),
   };
 
   async loadDirectory(

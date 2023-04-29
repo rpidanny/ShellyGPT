@@ -53,6 +53,7 @@
     "marked": "^4.3.0",
     "marked-terminal": "^5.1.1",
     "pdf-parser": "^1.0.5",
+    "srt-parser-2": "^1.2.2",
     "zod": "^3.21.4"
   },
   "devDependencies": {
