@@ -67,7 +67,8 @@ export class ShellyService {
     collection: string,
     split = true,
     chunkSize = 400,
-    chunkOverlap = 50
+    chunkOverlap = 50,
+    dryRun = false
   ): Promise<Document[]> {
     const docs = await this.dependencies.dataLoaderService.loadDirectory(
       path,
@@ -75,6 +76,8 @@ export class ShellyService {
       chunkSize,
       chunkOverlap
     );
+
+    if (dryRun) return docs;
 
     await this.dependencies.vectorStoreService.storeDocuments(
       docs,
