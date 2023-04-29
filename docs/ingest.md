@@ -34,6 +34,10 @@ DESCRIPTION
 
 EXAMPLES
   $ shelly ingest --collection=foo ./data
+
+  $ shelly ingest --collection=foo --split ./data
+
+  $ shelly ingest --collection=foo --split --chunkSize=500 --chunkOverlap=50./data
 ```
 
 _See code: [dist/commands/ingest/index.ts](https://github.com/rpidanny/shelly/blob/v0.0.0/dist/commands/ingest/index.ts)_

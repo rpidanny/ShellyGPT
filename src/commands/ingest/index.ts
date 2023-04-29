@@ -12,6 +12,8 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
 
   static examples = [
     '<%= config.bin %> <%= command.id %> --collection=foo ./data',
+    '<%= config.bin %> <%= command.id %> --collection=foo --split ./data',
+    '<%= config.bin %> <%= command.id %> --collection=foo --split --chunkSize=500 --chunkOverlap=50./data',
   ];
 
   static flags = {
