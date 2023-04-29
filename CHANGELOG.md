@@ -1,3 +1,10 @@
+## [1.3.0](https://github.com/rpidanny/shelly/compare/v1.2.0...v1.3.0) (2023-04-29)
+
+
+### Features
+
+* add github ingest ([#10](https://github.com/rpidanny/shelly/issues/10)) ([48dfc49](https://github.com/rpidanny/shelly/commit/48dfc498cae119dc9eba52094be2cb9fd95b5de6))
+
 ## [1.2.0](https://github.com/rpidanny/shelly/compare/v1.1.0...v1.2.0) (2023-04-29)
 
 
