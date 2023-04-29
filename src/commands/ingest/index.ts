@@ -80,7 +80,9 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
     } = this.flags;
 
     ux.action.start(
-      `Ingesting ${dir} into ${this.localConfig.vectorStore}/${collection}`
+      `Ingesting ${dir || githubRepo} into ${
+        this.localConfig.vectorStore
+      }/${collection}`
     );
 
     const shelly = await this.getShelly(verbose);
