@@ -87,4 +87,32 @@ export class ShellyService {
 
     return docs;
   }
+
+  async ingestGitHubRepo(
+    repo: string,
+    branch: string,
+    collection: string,
+    split = true,
+    chunkSize = 400,
+    chunkOverlap = 50,
+    dryRun = false
+  ): Promise<Document[]> {
+    const docs = await this.dependencies.dataLoaderService.loadGitHubRepo(
+      repo,
+      branch,
+      split,
+      chunkSize,
+      chunkOverlap
+    );
+
+    if (dryRun) return docs;
+
+    await this.dependencies.vectorStoreService.storeDocuments(
+      docs,
+      this.embeddings,
+      collection
+    );
+
+    return docs;
+  }
 }

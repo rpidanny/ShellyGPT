@@ -7,6 +7,7 @@ import { JSONLoader } from 'langchain/document_loaders/fs/json';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { SRTLoader } from 'langchain/document_loaders/fs/srt';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
+import { GithubRepoLoader } from 'langchain/document_loaders/web/github';
 import { TokenTextSplitter } from 'langchain/text_splitter';
 
 export class DataLoaderService {
@@ -30,6 +31,32 @@ export class DataLoaderService {
     chunkOverlap = 50
   ): Promise<Document[]> {
     const loader = new DirectoryLoader(path, this.extensionsMap);
+
+    const docs = await loader.load();
+
+    if (!split) return docs;
+
+    const splitter = new TokenTextSplitter({
+      encodingName: 'cl100k_base',
+      chunkSize,
+      chunkOverlap,
+    });
+
+    return await splitter.createDocuments(docs.map((d) => d.pageContent));
+  }
+
+  async loadGitHubRepo(
+    repo: string,
+    branch: string,
+    split = true,
+    chunkSize = 400,
+    chunkOverlap = 50
+  ): Promise<Document[]> {
+    const loader = new GithubRepoLoader(repo, {
+      branch,
+      recursive: true,
+      unknown: 'warn',
+    });
 
     const docs = await loader.load();
 
