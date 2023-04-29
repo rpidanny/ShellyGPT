@@ -24,6 +24,12 @@ Shelly is a command-line tool that ingests data into a vector store and generate
 
 With Shelly, you can have the genius mind of Sheldon Cooper at your fingertips, answering all your queries with its powerful GPT-based algorithms. Gone are the days of tirelessly searching for answers, as Shelly provides you with accurate solutions using its advanced machine learning technology.
 
+# Demos
+
+## The Big Bang Theory Trivia
+
+![The Big Bang Theory Trivia](demo/bigbangtheory-trivia.mov)
+
 # Features
 
 - [x] Ingest data into a vector store
