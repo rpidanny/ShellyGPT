@@ -12,6 +12,7 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
 
   static examples = [
     '<%= config.bin %> <%= command.id %> --collection=foo ./data',
+    '<%= config.bin %> <%= command.id %> --collection=foo --dryRun ./data',
     '<%= config.bin %> <%= command.id %> --collection=foo --split ./data',
     '<%= config.bin %> <%= command.id %> --collection=foo --split --chunkSize=500 --chunkOverlap=50./data',
   ];
@@ -20,6 +21,10 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
     verbose: Flags.boolean({
       char: 'v',
       description: 'Enable verbose mode',
+    }),
+    dryRun: Flags.boolean({
+      char: 'd',
+      description: "Enable dry run that doesn't ingest data",
     }),
     collection: Flags.string({
       char: 'c',
@@ -48,7 +53,8 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
 
   public async run(): Promise<Document[]> {
     const { dir } = this.args;
-    const { collection, verbose, chunkSize, chunkOverlap, split } = this.flags;
+    const { collection, verbose, chunkSize, chunkOverlap, split, dryRun } =
+      this.flags;
 
     ux.action.start(
       `Ingesting ${dir} into ${this.localConfig.vectorStore}/${collection}`
@@ -61,7 +67,8 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
       collection,
       split,
       chunkSize,
-      chunkOverlap
+      chunkOverlap,
+      dryRun
     );
 
     ux.action.stop();

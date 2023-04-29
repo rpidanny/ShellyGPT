@@ -33,13 +33,13 @@ describe('Ingest command', () => {
   });
 
   test.each`
-    verbose      | collection           | split        | chunkSize    | chunkOverlap
-    ${undefined} | ${undefined}         | ${undefined} | ${undefined} | ${undefined}
-    ${true}      | ${'some-collection'} | ${undefined} | ${100}       | ${10}
-    ${true}      | ${'some-collection'} | ${true}      | ${100}       | ${10}
+    verbose      | collection           | split        | chunkSize    | chunkOverlap | dryRyn
+    ${undefined} | ${undefined}         | ${undefined} | ${undefined} | ${undefined} | ${undefined}
+    ${true}      | ${'some-collection'} | ${undefined} | ${100}       | ${10}        | ${undefined}
+    ${true}      | ${'some-collection'} | ${true}      | ${100}       | ${10}        | ${true}
   `(
-    'should call ShellyService.ask with the correct flags ($verbose, $collection, $split, $chunkSize, $chunkOverlap) and args',
-    async ({ verbose, collection, split, chunkSize, chunkOverlap }) => {
+    'should call ShellyService.ask with the correct flags ($verbose, $collection, $split, $chunkSize, $chunkOverlap, $dryRun) and args',
+    async ({ verbose, collection, split, chunkSize, chunkOverlap, dryRun }) => {
       const stdoutSpy = jest
         .spyOn(process.stdout, 'write')
         .mockImplementation();
@@ -51,6 +51,7 @@ describe('Ingest command', () => {
         ...(split ? ['--split'] : []),
         ...(chunkSize ? ['--chunkSize', `${chunkSize}`] : []),
         ...(chunkOverlap ? ['--chunkOverlap', `${chunkOverlap}`] : []),
+        ...(dryRun ? ['--dryRun'] : []),
         dir,
       ];
 
@@ -68,7 +69,8 @@ describe('Ingest command', () => {
         collection ?? 'ShellyDefault',
         split,
         chunkSize ?? 400,
-        chunkOverlap ?? 50
+        chunkOverlap ?? 50,
+        dryRun
       );
       expect(stdoutSpy).toHaveBeenCalledWith(
         expect.stringMatching('Ingested 1 documents')
