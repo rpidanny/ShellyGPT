@@ -42,7 +42,7 @@
     "@oclif/plugin-autocomplete": "^2.1.9",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-not-found": "^2.3.23",
-    "@oclif/plugin-plugins": "^2.4.6",
+    "@oclif/plugin-plugins": "^2.4.7",
     "@pinecone-database/pinecone": "^0.0.14",
     "@zilliz/milvus2-sdk-node": "^2.2.7",
     "chalk": "^4.1.2",
