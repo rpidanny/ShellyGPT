@@ -55,9 +55,9 @@ jobs:
       - name: NPM Build
         run: npm run build --if-present
 
-      # - name: Release
-      #   run: npm run release
-      #   env:
-      #     GITHUB_TOKEN: ${{secrets.ROOT_GH_TOKEN}}
-      #     NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-      #     CI: true
+      - name: Release
+        run: npm run release
+        env:
+          GITHUB_TOKEN: ${{secrets.ROOT_GH_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          CI: true
