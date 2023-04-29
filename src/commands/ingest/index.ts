@@ -1,4 +1,4 @@
-import { Args, Flags, ux } from '@oclif/core';
+import { Flags, ux } from '@oclif/core';
 import chalk from 'chalk';
 import { Document } from 'langchain/docstore';
 
@@ -11,10 +11,11 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
   static description = 'Ingest directory to a vector store';
 
   static examples = [
-    '<%= config.bin %> <%= command.id %> --collection=foo ./data',
-    '<%= config.bin %> <%= command.id %> --collection=foo --dryRun ./data',
-    '<%= config.bin %> <%= command.id %> --collection=foo --split ./data',
-    '<%= config.bin %> <%= command.id %> --collection=foo --split --chunkSize=500 --chunkOverlap=50./data',
+    '<%= config.bin %> <%= command.id %> --collection=foo --dir="./data"',
+    '<%= config.bin %> <%= command.id %> --collection=foo --dryRun --dir="./data"',
+    '<%= config.bin %> <%= command.id %> --collection=foo --split --dir="./data"',
+    '<%= config.bin %> <%= command.id %> --collection=foo --split --chunkSize=500 --chunkOverlap=50 --dir="./data"',
+    '<%= config.bin %> <%= command.id %> --collection=foo --githubRepo="https://github.com/rpidanny/shelly"',
   ];
 
   static flags = {
@@ -23,7 +24,7 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
       description: 'Enable verbose mode',
     }),
     dryRun: Flags.boolean({
-      char: 'd',
+      char: 'D',
       description: "Enable dry run that doesn't ingest data",
     }),
     collection: Flags.string({
@@ -33,7 +34,7 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
     }),
     split: Flags.boolean({
       char: 's',
-      description: 'Wether to split documents into chunks or not',
+      description: 'Enable split of documents into chunks',
     }),
     chunkSize: Flags.integer({
       char: 't',
@@ -45,16 +46,38 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
       description: 'Number of tokens to overlap per chunk',
       default: 50,
     }),
+    dir: Flags.string({
+      char: 'd',
+      description: 'Path of the directory to ingest',
+      required: false,
+    }),
+    githubRepo: Flags.string({
+      char: 'g',
+      description: 'URL of a GitHub repo to ingest (https)',
+      required: false,
+    }),
+    githubBranch: Flags.string({
+      char: 'b',
+      description: 'The git branch you want to ingest',
+      required: false,
+      default: 'main',
+    }),
   };
 
-  static args = {
-    dir: Args.string({ description: 'directory to ingest', required: true }),
-  };
+  static args = {};
 
   public async run(): Promise<Document[]> {
-    const { dir } = this.args;
-    const { collection, verbose, chunkSize, chunkOverlap, split, dryRun } =
-      this.flags;
+    const {
+      collection,
+      verbose,
+      chunkSize,
+      chunkOverlap,
+      split,
+      dryRun,
+      dir,
+      githubRepo,
+      githubBranch,
+    } = this.flags;
 
     ux.action.start(
       `Ingesting ${dir} into ${this.localConfig.vectorStore}/${collection}`
@@ -62,14 +85,33 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
 
     const shelly = await this.getShelly(verbose);
 
-    const docs = await shelly.ingestDirectory(
-      dir,
-      collection,
-      split,
-      chunkSize,
-      chunkOverlap,
-      dryRun
-    );
+    let docs: Document[] = [];
+
+    if (dir) {
+      docs = docs.concat(
+        await shelly.ingestDirectory(
+          dir,
+          collection,
+          split,
+          chunkSize,
+          chunkOverlap,
+          dryRun
+        )
+      );
+    }
+    if (githubRepo) {
+      docs = docs.concat(
+        await shelly.ingestGitHubRepo(
+          githubRepo,
+          githubBranch,
+          collection,
+          split,
+          chunkSize,
+          chunkOverlap,
+          dryRun
+        )
+      );
+    }
 
     ux.action.stop();
     this.log(chalk.green(`Ingested ${docs.length} documents`));

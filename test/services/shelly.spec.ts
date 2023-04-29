@@ -11,7 +11,8 @@ describe('Shelly Service', () => {
   let vectorStoreService: VectorStoreService;
   let shelly: ShellyService;
   const docs: Document[] = [{ pageContent: 'some text', metadata: {} }];
-
+  const githubRepo = 'https://github.com/rpidanny/alfred-repository';
+  const githubBranch = 'master';
   const mockConfig = getMockConfig();
 
   beforeEach(() => {
@@ -66,6 +67,58 @@ describe('Shelly Service', () => {
 
       expect(resp).toEqual(docs);
       expect(dataLoaderService.loadDirectory).toHaveBeenCalledTimes(1);
+      expect(vectorStoreService.storeDocuments).toBeCalled();
+    });
+  });
+
+  describe('ingestGitHubRepo', () => {
+    it('should not call vectorStoreService when dryRun is true', async () => {
+      dataLoaderService.loadGitHubRepo = jest.fn().mockResolvedValue(docs);
+
+      const resp = await shelly.ingestGitHubRepo(
+        githubRepo,
+        githubBranch,
+        'some-collection',
+        undefined,
+        undefined,
+        undefined,
+        true
+      );
+
+      expect(resp).toEqual(docs);
+      expect(dataLoaderService.loadGitHubRepo).toHaveBeenCalledTimes(1);
+      expect(vectorStoreService.storeDocuments).not.toBeCalled();
+    });
+
+    it('should call vectorStoreService when dryRun is false', async () => {
+      dataLoaderService.loadGitHubRepo = jest.fn().mockResolvedValue(docs);
+
+      const resp = await shelly.ingestGitHubRepo(
+        githubRepo,
+        githubBranch,
+        'some-collection',
+        undefined,
+        undefined,
+        undefined,
+        false
+      );
+
+      expect(resp).toEqual(docs);
+      expect(dataLoaderService.loadGitHubRepo).toHaveBeenCalledTimes(1);
+      expect(vectorStoreService.storeDocuments).toBeCalled();
+    });
+
+    it('should call vectorStoreService by default', async () => {
+      dataLoaderService.loadGitHubRepo = jest.fn().mockResolvedValue(docs);
+
+      const resp = await shelly.ingestGitHubRepo(
+        githubRepo,
+        githubBranch,
+        'some-collection'
+      );
+
+      expect(resp).toEqual(docs);
+      expect(dataLoaderService.loadGitHubRepo).toHaveBeenCalledTimes(1);
       expect(vectorStoreService.storeDocuments).toBeCalled();
     });
   });

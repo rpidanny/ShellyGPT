@@ -8,6 +8,8 @@ describe('DataLoaderService', () => {
   const rootPath = './test/data';
   const dataPath = `${rootPath}/supported`;
   const unsupportedDataPath = `${rootPath}/unsupported`;
+  const githubRepo = 'https://github.com/rpidanny/alfred-repository';
+  const githubBranch = 'master';
 
   let dataLoaderService: DataLoaderService;
   let encoding: Tiktoken;
@@ -97,6 +99,56 @@ describe('DataLoaderService', () => {
       expect(documents).toBeDefined();
       expect(documents).toBeInstanceOf(Array);
       expect(documents.length).toBe(0);
+    });
+  });
+
+  describe('loadGitHubRepo', () => {
+    test(`should load github repo with default options`, async () => {
+      // act
+      const documents = await dataLoaderService.loadGitHubRepo(
+        githubRepo,
+        githubBranch
+      );
+
+      // assert
+      expect(documents).toBeDefined();
+      expect(documents).toBeInstanceOf(Array);
+      expect(documents.length).toBeGreaterThan(0);
+
+      for (const document of documents) {
+        expect(document).toBeInstanceOf(Document);
+        expect(document.pageContent).toBeDefined();
+        expect(document.pageContent.length).toBeGreaterThan(0);
+        expect(document.pageContent).not.toBe('');
+        expect(encoding.encode(document.pageContent).length).toBeLessThan(450);
+      }
+    });
+
+    it('should load from directory and not split documents', async () => {
+      // arrange
+      const split = false;
+
+      // act
+      const documents = await dataLoaderService.loadGitHubRepo(
+        githubRepo,
+        githubBranch,
+        split
+      );
+
+      // assert
+      expect(documents).toBeDefined();
+      expect(documents).toBeInstanceOf(Array);
+      expect(documents.length).toBeGreaterThan(0);
+
+      for (const document of documents) {
+        expect(document).toBeInstanceOf(Document);
+        expect(document.pageContent).toBeDefined();
+        expect(document.pageContent.length).toBeGreaterThan(0);
+        expect(document.pageContent).not.toBe('');
+        expect(encoding.encode(document.pageContent).length).toBeGreaterThan(
+          119
+        );
+      }
     });
   });
 });
