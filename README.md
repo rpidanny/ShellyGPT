@@ -9,6 +9,7 @@ Welcome to Shelly - the coolest CLI tool around! Ingesting data and generating i
 
 <!-- toc -->
 * [What is Shelly?](#what-is-shelly)
+* [Demo](#demo)
 * [Features](#features)
 * [Installation](#installation)
 * [Configuration](#configuration)
@@ -23,6 +24,12 @@ Welcome to Shelly - the coolest CLI tool around! Ingesting data and generating i
 Shelly is a command-line tool that ingests data into a vector store and generates instant answers to your questions using ChatGPT. Inspired by the iconic character of Sheldon Cooper from The Big Bang Theory, Shelly brings a fun and quirky vibe to your command-line experience.
 
 With Shelly, you can have the genius mind of Sheldon Cooper at your fingertips, answering all your queries with its powerful GPT-based algorithms. Gone are the days of tirelessly searching for answers, as Shelly provides you with accurate solutions using its advanced machine learning technology.
+
+# Demo
+
+## Big Bang Theory Trivia
+
+https://user-images.githubusercontent.com/6696862/235325240-ba6df010-d238-411e-b137-55cfea249d2c.mov
 
 # Features
 
@@ -77,7 +84,7 @@ $ npm install -g @rpidanny/shelly
 $ shelly COMMAND
 running command...
 $ shelly (--version)
-@rpidanny/shelly/0.0.0 darwin-arm64 node-v18.14.0
+@rpidanny/shelly/1.2.0 darwin-arm64 node-v18.14.0
 $ shelly --help [COMMAND]
 USAGE
   $ shelly COMMAND
