@@ -2,7 +2,9 @@
   "extends": "../tsconfig",
   "compilerOptions": {
     "noEmit": true,
-    "composite": true
+    "composite": true,
+    "rootDirs": ["src", "test"]
   },
-  "references": [{ "path": ".." }]
+  "references": [{ "path": "." }],
+  "include": ["src/**/*", "test/**/*.spec.ts"]
 }

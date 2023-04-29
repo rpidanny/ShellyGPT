@@ -1,7 +1,7 @@
 {
   "name": "@rpidanny/shelly",
   "version": "0.0.0",
-  "description": "A command-line tool that ingests data into a vector store and generates GPT-based answers, giving you the Sheldon Cooper you never had at your fingertips.",
+  "description": "A command-line tool that ingests data and generates instant answers using ChatGPT, giving you the Sheldon Cooper you never had at your fingertips.",
   "author": "rpidanny @rpidanny",
   "type": "module",
   "bin": {
@@ -100,8 +100,7 @@
     "dirname": "shelly",
     "commands": "./dist/commands",
     "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
+      "@oclif/plugin-help"
     ],
     "topicSeparator": " ",
     "topics": {},

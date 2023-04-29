@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/recommended",
   "compilerOptions": {
-    "rootDirs": ["src", "test"],
+    "rootDirs": ["src"],
     "outDir": "dist",
     "target": "es2021",
     "module": "esnext",
@@ -20,6 +20,6 @@
   "ts-node": {
     "esm": true
   },
-  "include": ["src/**/*", "test/**/*.spec.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "docs", "local_tests"]
 }

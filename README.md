@@ -1,17 +1,48 @@
-Shelly
+Shelly :robot:
 =================
 
-A command-line tool that ingests data into a vector store and generates GPT-based answers, giving you the Sheldon Cooper you never had at your fingertips.
+<p align="left">
+  <img src="sheldon_mid.png" height="200">
+</p>
+
+Welcome to Shelly - the coolest CLI tool around! Ingesting data and generating instant answers using ChatGPT, Shelly provides you with the Sheldon Cooper you never had at your fingertips.
+
+<!-- toc -->
+* [What is Shelly?](#what-is-shelly)
+* [Features](#features)
+* [Installation](#installation)
+* [Configuration](#configuration)
+* [Usage](#usage)
+* [Command Topics](#command-topics)
+* [Credits](#credits)
+* [License](#license)
+<!-- tocstop -->
+
+# What is Shelly?
+
+Shelly is a command-line tool that ingests data into a vector store and generates instant answers to your questions using ChatGPT. Inspired by the iconic character of Sheldon Cooper from The Big Bang Theory, Shelly brings a fun and quirky vibe to your command-line experience.
+
+With Shelly, you can have the genius mind of Sheldon Cooper at your fingertips, answering all your queries with its powerful GPT-based algorithms. Gone are the days of tirelessly searching for answers, as Shelly provides you with accurate solutions using its advanced machine learning technology.
+
+# Features
+
+- [x] Ingest data into a vector store
+- [x] Generate instant answers to your questions using ChatGPT
+
+## Roadmap
+
+- [ ] Save interaction history
+- [ ] Web portal
 
 # Installation
 
-You can install Shelly using npm by running the following command:
+To get started with Shelly, you can install it via npm using the following command:
 
 ```bash
 npm i -g @rpidanny/shelly
 ```
 
-Alternatively, you can download the installer for your operating system (Windows, Linux, or Mac) from the release page.
+Alternatively, you can download installers for `Windows`, `Linux`, and `macOS` from the [release page](https://github.com/rpidanny/shelly/releases).
 
 # Configuration
 
@@ -25,340 +56,49 @@ This command will prompt you to add your OpenAI keys and vector store configurat
 
 ## Vector Store Options
 
-Shelly provides two options for the vector store - Pinecone and Milvus. If you choose Milvus, you can create a local Milvus instance using the docker-compose.yml file located in the `docker/milvus` directory. To create the local Milvus instance, run the following command:
+Shelly supports two options for the vector store:
+
+1. Pinecone
+2. Milvus
+
+If you choose to use Milvus, you can create a local Milvus instance using the provided Docker Compose file located at `docker/milvus/docker-compose.yml`.
+
+To create the local Milvus instance, run the following command:
 
 ```bash
 cd docker/milvus
 docker-compose up -d
 ```
 
-<!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g shelly
+$ npm install -g @rpidanny/shelly
 $ shelly COMMAND
 running command...
 $ shelly (--version)
-shelly/0.0.0 darwin-arm64 node-v18.14.0
+@rpidanny/shelly/0.0.0 darwin-arm64 node-v18.14.0
 $ shelly --help [COMMAND]
 USAGE
   $ shelly COMMAND
 ...
 ```
 <!-- usagestop -->
-# Commands
 <!-- commands -->
-* [`shelly hello PERSON`](#shelly-hello-person)
-* [`shelly hello world`](#shelly-hello-world)
-* [`shelly help [COMMANDS]`](#shelly-help-commands)
-* [`shelly plugins`](#shelly-plugins)
-* [`shelly plugins:install PLUGIN...`](#shelly-pluginsinstall-plugin)
-* [`shelly plugins:inspect PLUGIN...`](#shelly-pluginsinspect-plugin)
-* [`shelly plugins:install PLUGIN...`](#shelly-pluginsinstall-plugin-1)
-* [`shelly plugins:link PLUGIN`](#shelly-pluginslink-plugin)
-* [`shelly plugins:uninstall PLUGIN...`](#shelly-pluginsuninstall-plugin)
-* [`shelly plugins:uninstall PLUGIN...`](#shelly-pluginsuninstall-plugin-1)
-* [`shelly plugins:uninstall PLUGIN...`](#shelly-pluginsuninstall-plugin-2)
-* [`shelly plugins update`](#shelly-plugins-update)
+# Command Topics
 
-## `shelly hello PERSON`
+* [`shelly ask`](docs/ask.md) - Ask questions or instruct shelly to do something.
+* [`shelly config`](docs/config.md) - Get currently set configs
+* [`shelly configure`](docs/configure.md) - Configure shelly
+* [`shelly help`](docs/help.md) - Display help for shelly.
+* [`shelly ingest`](docs/ingest.md) - Ingest directory to a vector store
 
-Say hello
-
-```
-USAGE
-  $ shelly hello PERSON -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Who is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [dist/commands/hello/index.ts](https://github.com/rpidanny/shelly/blob/v0.0.0/dist/commands/hello/index.ts)_
-
-## `shelly hello world`
-
-Say hello world
-
-```
-USAGE
-  $ shelly hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ shelly hello world
-  hello world! (./src/commands/hello/world.ts)
-```
-
-## `shelly help [COMMANDS]`
-
-Display help for shelly.
-
-```
-USAGE
-  $ shelly help [COMMANDS] [-n]
-
-ARGUMENTS
-  COMMANDS  Command to show help for.
-
-FLAGS
-  -n, --nested-commands  Include all nested commands in the output.
-
-DESCRIPTION
-  Display help for shelly.
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.9/src/commands/help.ts)_
-
-## `shelly plugins`
-
-List installed plugins.
-
-```
-USAGE
-  $ shelly plugins [--core]
-
-FLAGS
-  --core  Show core plugins.
-
-DESCRIPTION
-  List installed plugins.
-
-EXAMPLES
-  $ shelly plugins
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.4.6/src/commands/plugins/index.ts)_
-
-## `shelly plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
-
-```
-USAGE
-  $ shelly plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
-
-FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Installs a plugin into the CLI.
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-
-ALIASES
-  $ shelly plugins add
-
-EXAMPLES
-  $ shelly plugins:install myplugin 
-
-  $ shelly plugins:install https://github.com/someuser/someplugin
-
-  $ shelly plugins:install someuser/someplugin
-```
-
-## `shelly plugins:inspect PLUGIN...`
-
-Displays installation properties of a plugin.
-
-```
-USAGE
-  $ shelly plugins:inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN  [default: .] Plugin to inspect.
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Displays installation properties of a plugin.
-
-EXAMPLES
-  $ shelly plugins:inspect myplugin
-```
-
-## `shelly plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
-
-```
-USAGE
-  $ shelly plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
-
-FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Installs a plugin into the CLI.
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-
-ALIASES
-  $ shelly plugins add
-
-EXAMPLES
-  $ shelly plugins:install myplugin 
-
-  $ shelly plugins:install https://github.com/someuser/someplugin
-
-  $ shelly plugins:install someuser/someplugin
-```
-
-## `shelly plugins:link PLUGIN`
-
-Links a plugin into the CLI for development.
-
-```
-USAGE
-  $ shelly plugins:link PLUGIN
-
-ARGUMENTS
-  PATH  [default: .] path to plugin
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Links a plugin into the CLI for development.
-  Installation of a linked plugin will override a user-installed or core plugin.
-
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
-  command will override the user-installed or core plugin implementation. This is useful for development work.
-
-
-EXAMPLES
-  $ shelly plugins:link myplugin
-```
-
-## `shelly plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ shelly plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ shelly plugins unlink
-  $ shelly plugins remove
-```
-
-## `shelly plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ shelly plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ shelly plugins unlink
-  $ shelly plugins remove
-```
-
-## `shelly plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ shelly plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ shelly plugins unlink
-  $ shelly plugins remove
-```
-
-## `shelly plugins update`
-
-Update installed plugins.
-
-```
-USAGE
-  $ shelly plugins update [-h] [-v]
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Update installed plugins.
-```
 <!-- commandsstop -->
 
-## License
+# Credits
+
+Shelly was created by [rpidanny](https://github.com/rpidanny) and is inspired by the iconic character of Sheldon Cooper from The Big Bang Theory.
+
+# License
 
 Shelly is released under the MIT License. See the [LICENSE](LICENSE) file for details.
