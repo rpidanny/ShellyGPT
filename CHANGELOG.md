@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/rpidanny/shelly/compare/v1.1.0...v1.2.0) (2023-04-29)
+
+
+### Features
+
+* **ingest:** add srt loader ([#7](https://github.com/rpidanny/shelly/issues/7)) ([f8cd07c](https://github.com/rpidanny/shelly/commit/f8cd07c665e96fc1d90c0c0cd115a488efa77d2a))
+
 ## [1.1.0](https://github.com/rpidanny/shelly/compare/v1.0.1...v1.1.0) (2023-04-29)
 
 
