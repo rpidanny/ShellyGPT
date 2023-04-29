@@ -9,6 +9,7 @@ Welcome to Shelly - the coolest CLI tool around! Ingesting data and generating i
 
 <!-- toc -->
 * [What is Shelly?](#what-is-shelly)
+* [Demo](#demo)
 * [Features](#features)
 * [Installation](#installation)
 * [Configuration](#configuration)
@@ -83,7 +84,7 @@ $ npm install -g @rpidanny/shelly
 $ shelly COMMAND
 running command...
 $ shelly (--version)
-@rpidanny/shelly/0.0.0 darwin-arm64 node-v18.14.0
+@rpidanny/shelly/1.2.0 darwin-arm64 node-v18.14.0
 $ shelly --help [COMMAND]
 USAGE
   $ shelly COMMAND

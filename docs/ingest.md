@@ -11,14 +11,15 @@ Ingest directory to a vector store
 
 ```
 USAGE
-  $ shelly ingest DIR [--json] [--log-level debug|info|warn|error] [-v] [-c <value>] [-s] [-t <value>] [-o
-    <value>]
+  $ shelly ingest DIR [--json] [--log-level debug|info|warn|error] [-v] [-d] [-c <value>] [-s] [-t <value>]
+    [-o <value>]
 
 ARGUMENTS
   DIR  directory to ingest
 
 FLAGS
   -c, --collection=<value>    [default: ShellyDefault] Name of the collection to use
+  -d, --dryRun                Enable dry run that doesn't ingest data
   -o, --chunkOverlap=<value>  [default: 50] Number of tokens to overlap per chunk
   -s, --split                 Wether to split documents into chunks or not
   -t, --chunkSize=<value>     [default: 400] The size of individual chunks. (Measured in tiktokens)
@@ -35,9 +36,11 @@ DESCRIPTION
 EXAMPLES
   $ shelly ingest --collection=foo ./data
 
+  $ shelly ingest --collection=foo --dryRun ./data
+
   $ shelly ingest --collection=foo --split ./data
 
   $ shelly ingest --collection=foo --split --chunkSize=500 --chunkOverlap=50./data
 ```
 
-_See code: [dist/commands/ingest/index.ts](https://github.com/rpidanny/shelly/blob/v0.0.0/dist/commands/ingest/index.ts)_
+_See code: [dist/commands/ingest/index.ts](https://github.com/rpidanny/shelly/blob/v1.2.0/dist/commands/ingest/index.ts)_
