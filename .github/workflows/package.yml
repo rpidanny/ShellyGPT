@@ -1,0 +1,81 @@
+name: Package
+
+on:
+  release:
+    types: [published]
+  # support manual release in case something goes wrong and needs to be repeated or tested
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: tag that needs to publish
+        type: string
+        required: true
+
+jobs:
+  pack:
+    name: Package - ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: win
+            artifact_glob: './dist/win32/*.exe'
+          - target: deb
+            artifact_glob: './dist/deb/*.deb'
+          # - target: tarballs
+          #   artifact_glob: './dist/deb/*.tar.*'
+    steps:
+      - run: sudo apt update
+
+      - run: sudo apt install nsis p7zip-full p7zip-rar -y
+
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: NPM Install
+        run: npm ci
+
+      - run: npm run pack:${{ matrix.target }}
+
+      - name: Attach artifacts to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ matrix.artifact_glob }}
+          file_glob: true
+          overwrite: true
+          tag: ${{ github.event.release.tag_name || inputs.tag }}
+
+  pack-mac:
+    name: Package - macos
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: NPM Install
+        run: npm ci
+
+      - run: npm run pack:macos
+
+      - name: Attach artifacts to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./dist/macos/*.pkg
+          file_glob: true
+          overwrite: true
+          tag: ${{ github.event.release.tag_name || inputs.tag }}

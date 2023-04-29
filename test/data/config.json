@@ -1,0 +1,17 @@
+{
+  "openAi": {
+    "apiKey": "some-key",
+    "chatModel": "gpt-3.5-turbo",
+    "embeddingsModel": "text-embedding-ada-002"
+  },
+  "vectorStore": "milvus",
+  "milvus": {
+    "url": "http://localhost:19530",
+    "password": "some-pw",
+    "username": "some-user"
+  },
+  "pinecone": {
+    "apiKey": "some-other-key",
+    "environment": "some-env"
+  }
+}

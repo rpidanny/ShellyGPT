@@ -1,0 +1,25 @@
+{
+  "extends": "@tsconfig/recommended",
+  "compilerOptions": {
+    "rootDirs": ["src", "test"],
+    "outDir": "dist",
+    "target": "es2021",
+    "module": "esnext",
+    "moduleResolution": "nodenext",
+    "lib": ["ES2021", "ES2022.Object"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "declaration": true,
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "resolveJsonModule": true
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["src/**/*", "test/**/*.spec.ts"],
+  "exclude": ["node_modules", "dist", "docs", "local_tests"]
+}

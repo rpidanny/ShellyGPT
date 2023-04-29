@@ -1,0 +1,45 @@
+Edsger Wybe Dijkstra (/ˈdaɪkstrə/ DYKE-strə; Dutch: [ˈɛtsxər ˈʋibə ˈdɛikstra] (listen); 11 May 1930 – 6 August 2002) was a Dutch computer scientist, programmer, software engineer, systems scientist, and science essayist.[8][9] He received the 1972 Turing Award for fundamental contributions to developing structured programming languages, and was the Schlumberger Centennial Chair of Computer Sciences at The University of Texas at Austin from 1984 until 2000.
+
+Shortly before his death in 2002, he received the ACM PODC Influential Paper Award in distributed computing for his work on self-stabilization of program computation. This annual award was renamed the Dijkstra Prize the following year, in his honor.
+
+Biography
+Early years
+Edsger W. Dijkstra was born in Rotterdam. His father was a chemist who was president of the Dutch Chemical Society; he taught chemistry at a secondary school and was later its superintendent. His mother was a mathematician, but never had a formal job.[10][11]
+
+Dijkstra had considered a career in law and had hoped to represent the Netherlands in the United Nations. However, after graduating from school in 1948, at his parents' suggestion he studied mathematics and physics and then theoretical physics at the University of Leiden.[12]
+
+In the early 1950s, electronic computers were a novelty. Dijkstra stumbled on his career by accident, and through his supervisor, Professor Johannes Haantjes [nl], he met Adriaan van Wijngaarden, the director of the Computation Department at the Mathematical Center in Amsterdam, who offered Dijkstra a job; he officially became the Netherlands' first "programmer" in March 1952.[12]
+
+For some time Dijkstra remained committed to physics, working on it in Leiden three days out of each week. With increasing exposure to computing, however, his focus began to shift. As he recalled:[13]
+
+After having programmed for some three years, I had a discussion with A. van Wijngaarden, who was then my boss at the Mathematical Center in Amsterdam, a discussion for which I shall remain grateful to him as long as I live. The point was that I was supposed to study theoretical physics at the University of Leiden simultaneously, and as I found the two activities harder and harder to combine, I had to make up my mind, either to stop programming and become a real, respectable theoretical physicist, or to carry my study of physics to a formal completion only, with a minimum of effort, and to become....., yes what? A programmer? But was that a respectable profession? For after all, what was programming? Where was the sound body of knowledge that could support it as an intellectually respectable discipline? I remember quite vividly how I envied my hardware colleagues, who, when asked about their professional competence, could at least point out that they knew everything about vacuum tubes, amplifiers and the rest, whereas I felt that, when faced with that question, I would stand empty-handed. Full of misgivings I knocked on Van Wijngaarden's office door, asking him whether I could "speak to him for a moment"; when I left his office a number of hours later, I was another person. For after having listened to my problems patiently, he agreed that up till that moment there was not much of a programming discipline, but then he went on to explain quietly that automatic computers were here to stay, that we were just at the beginning and could not I be one of the persons called to make programming a respectable discipline in the years to come? This was a turning point in my life and I completed my study of physics formally as quickly as I could.
+
+— Edsger Dijkstra, The Humble Programmer (EWD340), Communications of the ACM
+When Dijkstra married Maria (Ria) C. Debets in 1957, he was required as a part of the marriage rites to state his profession. He stated that he was a programmer, which was unacceptable to the authorities, there being no such profession then in The Netherlands.[13][14]
+
+In 1959, he received his PhD from the University of Amsterdam for a thesis entitled 'Communication with an Automatic Computer',[15] devoted to a description of the assembly language designed for the first commercial computer developed in the Netherlands, the Electrologica X1. His thesis supervisor was Van Wijngaarden.[16]
+
+Mathematisch Centrum, Amsterdam
+From 1952 until 1962, Dijkstra worked at the Mathematisch Centrum in Amsterdam,[16] where he worked closely with Bram Jan Loopstra and Carel S. Scholten, who had been hired to build a computer. Their mode of interaction was disciplined: They would first decide upon the interface between the hardware and the software, by writing a programming manual. Then the hardware designers would have to be faithful to their part of the contract, while Dijkstra, the programmer, would write software for the nonexistent machine. Two of the lessons he learned from this experience were the importance of clear documentation, and that program debugging can be largely avoided through careful design.[12] Dijkstra formulated and solved the shortest path problem for a demonstration at the official inauguration of the ARMAC computer in 1956. Because of the absence of journals dedicated to automatic computing, he did not publish the result until 1959.
+
+At the Mathematical Center, Dijkstra and his colleague Jaap Zonneveld [nl] developed the first compiler for the programming language ALGOL 60 by August 1960, more than a year before a compiler was produced by another group.[12] ALGOL 60 is known as a key advance in the rise of structured programming.
+
+Eindhoven University of Technology
+
+The Eindhoven University of Technology, located in Eindhoven in the south of the Netherlands, where Dijkstra was a professor of mathematics from 1962 to 1984.
+In 1962, Dijkstra moved to Eindhoven, and later to Nuenen, in the south of the Netherlands, where he became a professor in the Mathematics Department at the Eindhoven University of Technology.[16] The university did not have a separate computer science department and the culture of the mathematics department did not particularly suit him. Dijkstra tried to build a group of computer scientists who could collaborate on solving problems. This was an unusual model of research for the Mathematics Department.[12] In the late 1960s he built the THE operating system (named for the university, then known as Technische Hogeschool Eindhoven), which has influenced the designs of subsequent operating systems through its use of software-based paged virtual memory.[17]
+
+Burroughs Corporation
+Dijkstra joined Burroughs Corporation, a company known then for producing computers based on an innovative hardware architecture, as its research fellow in August 1973. His duties consisted of visiting some of the firm's research centers a few times a year and carrying on his own research, which he did in the smallest Burroughs research facility, namely, his study on the second floor of his house in Nuenen. In fact, Dijkstra was the only research fellow of Burroughs and worked for it from home, occasionally travelling to its branches in the United States. As a result, he reduced his appointment at the university to one day a week. That day, Tuesday, soon became known as the day of the famous 'Tuesday Afternoon Club', a seminar during which he discussed with his colleagues scientific articles, looking at all aspects: notation, organisation, presentation, language, content, etc. Shortly after he moved in 1984 to the University of Texas at Austin (USA), a new 'branch' of the Tuesday Afternoon Club emerged in Austin, Texas.[16]
+
+The Burroughs years saw him at his most prolific in output of research articles. He wrote nearly 500 documents in the EWD series (described below), most of them technical reports, for private circulation within a select group.[12]
+
+The University of Texas at Austin
+
+The University of Texas at Austin, where Dijkstra held the Schlumberger Centennial Chair in Computer Sciences from 1984 until 1999.
+Dijkstra accepted the Schlumberger Centennial Chair in the Computer Science Department at the University of Texas at Austin in 1984.
+
+Last years
+Dijkstra worked in Austin until his retirement in November 1999. To mark the occasion and to celebrate his forty-plus years of seminal contributions to computing science, the Department of Computer Sciences organized a symposium, which took place on his 70th birthday in May 2000.[12]
+
+Dijkstra and his wife returned from Austin to his original house in Nuenen (Netherlands) where he found that he had only months to live. He said that he wanted to retire in Austin, Texas, but to die in the Netherlands. Dijkstra died on 6 August 2002 after a long struggle with cancer.[18] He and his wife Maria (Ria) Debets were survived by their three children: Marcus, Femke, and the computer scientist Rutger M. Dijkstra.
