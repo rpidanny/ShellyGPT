@@ -27,9 +27,12 @@ With Shelly, you can have the genius mind of Sheldon Cooper at your fingertips, 
 
 # Demo
 
-## Big Bang Theory Trivia
+## The Big Bang Theory Trivia
 
 https://user-images.githubusercontent.com/6696862/235325240-ba6df010-d238-411e-b137-55cfea249d2c.mov
+
+## Codebase Ingest / Query
+
 
 # Features
 
