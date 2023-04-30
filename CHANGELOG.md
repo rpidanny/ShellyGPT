@@ -1,3 +1,10 @@
+## [1.5.0](https://github.com/rpidanny/shelly/compare/v1.4.0...v1.5.0) (2023-04-30)
+
+
+### Features
+
+* add milvus command ([#15](https://github.com/rpidanny/shelly/issues/15)) ([9417ea4](https://github.com/rpidanny/shelly/commit/9417ea4af4881a99736d1a387b20783cf75358b5))
+
 ## [1.4.0](https://github.com/rpidanny/shelly/compare/v1.3.3...v1.4.0) (2023-04-30)
 
 
