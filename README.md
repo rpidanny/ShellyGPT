@@ -69,12 +69,12 @@ This command will prompt you to add your OpenAI keys and vector store configurat
 
 Shelly supports two options for the vector store:
 
-1. Pinecone
-2. Milvus
+1. [Pinecone](https://www.pinecone.io/)
+2. [Milvus](https://milvus.io/)
 
-If you choose to use Milvus, you can create a local Milvus instance using the provided Docker Compose file located at `docker/milvus/docker-compose.yml`.
+We recommend using **Milvus**, as it offers an API key-free experience and has no limitations on the number of collections you can create.
 
-To create the local Milvus instance, run the following command:
+To get started with Milvus, you can easily create a local instance by running `shelly milvus start` or by using the provided Docker Compose file located at `docker/milvus/docker-compose.yml`.
 
 ```bash
 cd docker/milvus
@@ -88,7 +88,7 @@ $ npm install -g @rpidanny/shelly
 $ shelly COMMAND
 running command...
 $ shelly (--version)
-@rpidanny/shelly/1.3.3 darwin-arm64 node-v18.14.0
+@rpidanny/shelly/1.4.0 darwin-arm64 node-v18.14.0
 $ shelly --help [COMMAND]
 USAGE
   $ shelly COMMAND
@@ -102,7 +102,9 @@ USAGE
 * [`shelly config`](docs/config.md) - Get currently set configs
 * [`shelly configure`](docs/configure.md) - Configure shelly
 * [`shelly help`](docs/help.md) - Display help for shelly.
+* [`shelly history`](docs/history.md) - Print history
 * [`shelly ingest`](docs/ingest.md) - Ingest directory to a vector store
+* [`shelly milvus`](docs/milvus.md) - Start local Milvus vector store
 
 <!-- commandsstop -->
 
