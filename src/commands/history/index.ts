@@ -11,7 +11,10 @@ export default class History extends BaseCommand<typeof History> {
 
   static description = 'Print history';
 
-  static examples = ['<%= config.bin %> <%= command.id %>'];
+  static examples = [
+    '<%= config.bin %> <%= command.id %>',
+    '<%= config.bin %> <%= command.id %> --collection=foo',
+  ];
 
   static flags = {
     collection: Flags.string({

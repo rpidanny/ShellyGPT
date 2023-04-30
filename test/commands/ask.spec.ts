@@ -67,7 +67,7 @@ describe('Ask command', () => {
       expect(askCommand.config.runHook).toHaveBeenNthCalledWith(1, 'chat', {
         chat: {
           collection: expectedCollection,
-          date: new Date(),
+          date: new Date().toUTCString(),
           message: question,
           sender: 'user',
         },
@@ -75,7 +75,7 @@ describe('Ask command', () => {
       expect(askCommand.config.runHook).toHaveBeenNthCalledWith(2, 'chat', {
         chat: {
           collection: expectedCollection,
-          date: new Date(),
+          date: new Date().toUTCString(),
           message: mockedAnswer,
           sender: 'shelly',
         },
