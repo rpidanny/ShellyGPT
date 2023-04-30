@@ -1,3 +1,10 @@
+## [1.4.0](https://github.com/rpidanny/shelly/compare/v1.3.3...v1.4.0) (2023-04-30)
+
+
+### Features
+
+* add conversation history ([#14](https://github.com/rpidanny/shelly/issues/14)) ([396ad72](https://github.com/rpidanny/shelly/commit/396ad721b480aacb9c5bbb12533be4c9ddeb380b))
+
 ## [1.3.3](https://github.com/rpidanny/shelly/compare/v1.3.2...v1.3.3) (2023-04-30)
 
 
