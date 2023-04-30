@@ -30,7 +30,7 @@ export class DataLoaderService {
     chunkSize = 400,
     chunkOverlap = 50
   ): Promise<Document[]> {
-    const loader = new DirectoryLoader(path, this.extensionsMap);
+    const loader = new DirectoryLoader(path, this.extensionsMap, true, 'warn');
 
     const docs = await loader.load();
 
