@@ -48,6 +48,7 @@
     "chalk": "^4.1.2",
     "d3-dsv": "^2.0.0",
     "epub2": "^3.0.1",
+    "figlet": "^1.6.0",
     "fs-extra": "^11.1.1",
     "html-to-text": "^9.0.5",
     "inquirer": "^8.2.5",
@@ -73,6 +74,7 @@
     "@semantic-release/npm": "^10.0.3",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@tsconfig/recommended": "^1.0.2",
+    "@types/figlet": "^1.5.6",
     "@types/fs-extra": "^11.0.1",
     "@types/inquirer": "^9.0.3",
     "@types/jest": "^29.5.1",
@@ -110,7 +112,10 @@
     "topicSeparator": " ",
     "topics": {},
     "hooks": {
-      "init": "./dist/hooks/init/config"
+      "init": [
+        "./dist/hooks/init/config",
+        "./dist/hooks/init/banner"
+      ]
     },
     "macos": {
       "identifier": "com.rpidanny.shelly"
