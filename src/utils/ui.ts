@@ -42,11 +42,10 @@ export function printChatMessage(
   chat: IChatMessage,
   log: (msg: string) => void
 ): void {
-  log('');
   log(
     `${chalk[chat.sender === Sender.User ? 'blue' : 'green'].bold(
       chat.sender.toUpperCase()
-    )} ${chalk.gray(`${chat.date.toUTCString()}`)}`
+    )} ${chalk.gray(`${chat.date}`)}`
   );
   log(
     marked(

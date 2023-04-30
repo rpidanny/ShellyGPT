@@ -68,7 +68,7 @@ export default class Ask extends BaseCommand<typeof Ask> {
   ) {
     await this.config.runHook('chat', {
       chat: {
-        date: new Date(),
+        date: new Date().toUTCString(),
         message,
         collection,
         sender,
