@@ -121,7 +121,17 @@
   },
   "bugs": "https://github.com/rpidanny/shelly/issues",
   "keywords": [
-    "oclif"
+    "gpt",
+    "gpt-3.5",
+    "gpt-4",
+    "ChatGPT",
+    "openai",
+    "llm",
+    "pinecone",
+    "milvus",
+    "vector-store",
+    "langchain",
+    "shelly"
   ],
   "types": "dist/index.d.ts"
 }
