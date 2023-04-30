@@ -1,16 +1,10 @@
 import { Args, Flags, ux } from '@oclif/core';
-import chalk from 'chalk';
-import { marked } from 'marked';
-import TerminalRenderer from 'marked-terminal';
 
 import { BaseCommand } from '../../baseCommand.js';
 import { DataLoaderService } from '../../services/data-loader/data-loader.service.js';
 import { ShellyService } from '../../services/shelly/shelly.service.js';
 import { VectorStoreService } from '../../services/vector-store/vector-store.service.js';
-
-marked.setOptions({
-  renderer: new TerminalRenderer(),
-});
+import { Sender } from '../../utils/sender.enums.js';
 
 export default class Ask extends BaseCommand<typeof Ask> {
   static description = 'Ask questions or instruct shelly to do something.';
@@ -42,7 +36,7 @@ export default class Ask extends BaseCommand<typeof Ask> {
     const { collection, verbose } = this.flags;
     const { question } = this.args;
 
-    this.log(`${chalk.bold.blue('Question: ')}: ${question}`);
+    await this.emitMessageEvent(question, collection, Sender.User);
 
     ux.action.start('running');
 
@@ -52,7 +46,7 @@ export default class Ask extends BaseCommand<typeof Ask> {
 
     ux.action.stop();
 
-    this.printAnswer(answer);
+    await this.emitMessageEvent(answer, collection, Sender.Shelly);
 
     return answer;
   }
@@ -67,13 +61,18 @@ export default class Ask extends BaseCommand<typeof Ask> {
     );
   }
 
-  private printAnswer(answer: string) {
-    this.log('');
-    this.log(chalk.green.bold('Answer:'));
-    this.log(
-      marked(
-        answer.replace(/```ts/g, '```js').replace(/```typescript/g, '```js')
-      )
-    );
+  private async emitMessageEvent(
+    message: string,
+    collection: string,
+    sender: string
+  ) {
+    await this.config.runHook('chat', {
+      chat: {
+        date: new Date(),
+        message,
+        collection,
+        sender,
+      },
+    });
   }
 }
