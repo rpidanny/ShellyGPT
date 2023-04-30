@@ -1,8 +1,23 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
+import { marked } from 'marked';
+import TerminalRenderer from 'marked-terminal';
 
-export function printBanner(log: (msg: string) => void): void {
-  log(chalk.bold.hex('#0077be')(figlet.textSync('Shelly')));
+import { IChatMessage } from '../hooks/chat/interfaces.js';
+import { Sender } from './sender.enums.js';
+
+marked.setOptions({
+  renderer: new TerminalRenderer(),
+});
+
+export function printBanner(version: string, log: (msg: string) => void): void {
+  log(
+    `${chalk.bold.hex('#0077be')(
+      figlet.textSync(`Shelly`, {
+        font: 'Standard',
+      })
+    )} ${chalk.hex('#0077be')(`v${version}`)}`
+  );
 }
 
 export function printConfigurationError(log: (msg: string) => void): void {
@@ -19,6 +34,23 @@ export function printConfigurationError(log: (msg: string) => void): void {
       `Please run ${chalk.bold(
         '"shelly configure"'
       )} and rectify this situation at once.`
+    )
+  );
+}
+
+export function printChatMessage(
+  chat: IChatMessage,
+  log: (msg: string) => void
+): void {
+  log('');
+  log(
+    `${chalk[chat.sender === Sender.User ? 'blue' : 'green'].bold(
+      chat.sender.toUpperCase()
+    )} ${chalk.gray(`${chat.date}`)}`
+  );
+  log(
+    marked(
+      chat.message.replace(/```ts/g, '```js').replace(/```typescript/g, '```js')
     )
   );
 }

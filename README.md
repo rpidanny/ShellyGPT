@@ -88,7 +88,7 @@ $ npm install -g @rpidanny/shelly
 $ shelly COMMAND
 running command...
 $ shelly (--version)
-@rpidanny/shelly/1.2.0 darwin-arm64 node-v18.14.0
+@rpidanny/shelly/1.3.3 darwin-arm64 node-v18.14.0
 $ shelly --help [COMMAND]
 USAGE
   $ shelly COMMAND
