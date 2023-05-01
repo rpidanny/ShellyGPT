@@ -12,6 +12,8 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
 
   static examples = [
     '<%= config.bin %> <%= command.id %> --collection=foo --dir="./data"',
+    '<%= config.bin %> <%= command.id %> --collection=foo --file="./shelly/README.md"',
+    '<%= config.bin %> <%= command.id %> --collection=foo --file="./shelly/README.md" --dir="./data"',
     '<%= config.bin %> <%= command.id %> --collection=foo --dryRun --dir="./data"',
     '<%= config.bin %> <%= command.id %> --collection=foo --split --dir="./data"',
     '<%= config.bin %> <%= command.id %> --collection=foo --split --chunkSize=500 --chunkOverlap=50 --dir="./data"',
@@ -62,6 +64,11 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
       required: false,
       default: 'main',
     }),
+    file: Flags.string({
+      char: 'f',
+      description: 'Path of the file to ingest',
+      required: false,
+    }),
   };
 
   static args = {};
@@ -75,23 +82,32 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
       split,
       dryRun,
       dir,
+      file,
       githubRepo,
       githubBranch,
     } = this.flags;
 
-    ux.action.start(
-      `Ingesting ${dir || githubRepo} into ${
-        this.localConfig.vectorStore
-      }/${collection}`
-    );
-
     const shelly = await this.getShelly(verbose);
+    const dest = `${this.localConfig.vectorStore}/${collection}`;
 
     let docs: Document[] = [];
 
+    if (file) {
+      docs = await this.runIngestion('file', file, dest, docs, async () =>
+        shelly.ingestFile(
+          file,
+          collection,
+          split,
+          chunkSize,
+          chunkOverlap,
+          dryRun
+        )
+      );
+    }
+
     if (dir) {
-      docs = docs.concat(
-        await shelly.ingestDirectory(
+      docs = await this.runIngestion('dir', dir, dest, docs, async () =>
+        shelly.ingestDirectory(
           dir,
           collection,
           split,
@@ -101,21 +117,26 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
         )
       );
     }
+
     if (githubRepo) {
-      docs = docs.concat(
-        await shelly.ingestGitHubRepo(
-          githubRepo,
-          githubBranch,
-          collection,
-          split,
-          chunkSize,
-          chunkOverlap,
-          dryRun
-        )
+      docs = await this.runIngestion(
+        'github repo',
+        githubRepo,
+        dest,
+        docs,
+        async () =>
+          shelly.ingestGitHubRepo(
+            githubRepo,
+            githubBranch,
+            collection,
+            split,
+            chunkSize,
+            chunkOverlap,
+            dryRun
+          )
       );
     }
 
-    ux.action.stop();
     this.log(chalk.green(`Ingested ${docs.length} documents`));
     return docs;
   }
@@ -128,5 +149,22 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
       this.localConfig,
       verbose
     );
+  }
+
+  private async runIngestion(
+    type: string,
+    src: string,
+    dest: string,
+    docs: Document[],
+    ingestFn: () => Promise<Document[]>
+  ) {
+    ux.action.start(
+      `Ingesting ${type}: ${chalk.magentaBright(src)} into ${chalk.yellowBright(
+        dest
+      )}`
+    );
+    docs = docs.concat(await ingestFn());
+    ux.action.stop();
+    return docs;
   }
 }
