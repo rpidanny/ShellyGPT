@@ -1,4 +1,6 @@
+import fs from 'fs-extra';
 import { Document } from 'langchain/document';
+import { BaseDocumentLoader } from 'langchain/document_loaders';
 import { CSVLoader } from 'langchain/document_loaders/fs/csv';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 import { DocxLoader } from 'langchain/document_loaders/fs/docx';
@@ -9,9 +11,13 @@ import { SRTLoader } from 'langchain/document_loaders/fs/srt';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
 import { GithubRepoLoader } from 'langchain/document_loaders/web/github';
 import { TokenTextSplitter } from 'langchain/text_splitter';
+import path from 'path';
 
 export class DataLoaderService {
-  private readonly extensionsMap = {
+  private readonly extensionsMap: Record<
+    string,
+    (path: string) => BaseDocumentLoader
+  > = {
     '.md': (path: string) => new TextLoader(path),
     '.txt': (path: string) => new TextLoader(path),
     '.json': (path: string) => new JSONLoader(path),
@@ -25,24 +31,46 @@ export class DataLoaderService {
   };
 
   async loadDirectory(
-    path: string,
-    split = true,
+    dirPath: string,
+    split = false,
     chunkSize = 400,
     chunkOverlap = 50
   ): Promise<Document[]> {
-    const loader = new DirectoryLoader(path, this.extensionsMap, true, 'warn');
+    const loader = new DirectoryLoader(
+      dirPath,
+      this.extensionsMap,
+      true,
+      'warn'
+    );
 
     const docs = await loader.load();
 
     if (!split) return docs;
 
-    const splitter = new TokenTextSplitter({
-      encodingName: 'cl100k_base',
-      chunkSize,
-      chunkOverlap,
-    });
+    return this.splitDocuments(docs, chunkSize, chunkOverlap);
+  }
 
-    return await splitter.createDocuments(docs.map((d) => d.pageContent));
+  async loadFile(
+    filePath: string,
+    split = false,
+    chunkSize = 400,
+    chunkOverlap = 50
+  ): Promise<Document[]> {
+    if (!(await fs.pathExists(filePath))) {
+      throw new Error(`File doesn't exist: ${filePath}`);
+    }
+
+    const ext = path.extname(filePath).toLowerCase();
+
+    if (!(ext in this.extensionsMap)) {
+      throw new Error(`Unsupported file extension: ${ext}`);
+    }
+
+    const docs = await this.extensionsMap[ext](filePath).load();
+
+    if (!split) return docs;
+
+    return this.splitDocuments(docs, chunkSize, chunkOverlap);
   }
 
   async loadGitHubRepo(
@@ -62,12 +90,23 @@ export class DataLoaderService {
 
     if (!split) return docs;
 
+    return this.splitDocuments(docs, chunkSize, chunkOverlap);
+  }
+
+  private async splitDocuments(
+    docs: Document[],
+    chunkSize: number,
+    chunkOverlap: number
+  ): Promise<Document[]> {
     const splitter = new TokenTextSplitter({
       encodingName: 'cl100k_base',
       chunkSize,
       chunkOverlap,
     });
 
-    return await splitter.createDocuments(docs.map((d) => d.pageContent));
+    return await splitter.createDocuments(
+      docs.map((d) => d.pageContent),
+      docs.map((d) => d.metadata)
+    );
   }
 }

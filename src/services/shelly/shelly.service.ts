@@ -63,7 +63,7 @@ export class ShellyService {
   }
 
   async ingestDirectory(
-    path: string,
+    dirPath: string,
     collection: string,
     split = true,
     chunkSize = 400,
@@ -71,7 +71,33 @@ export class ShellyService {
     dryRun = false
   ): Promise<Document[]> {
     const docs = await this.dependencies.dataLoaderService.loadDirectory(
-      path,
+      dirPath,
+      split,
+      chunkSize,
+      chunkOverlap
+    );
+
+    if (dryRun) return docs;
+
+    await this.dependencies.vectorStoreService.storeDocuments(
+      docs,
+      this.embeddings,
+      collection
+    );
+
+    return docs;
+  }
+
+  async ingestFile(
+    filePath: string,
+    collection: string,
+    split = true,
+    chunkSize = 400,
+    chunkOverlap = 50,
+    dryRun = false
+  ): Promise<Document[]> {
+    const docs = await this.dependencies.dataLoaderService.loadFile(
+      filePath,
       split,
       chunkSize,
       chunkOverlap

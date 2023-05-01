@@ -19,6 +19,7 @@ describe('Ingest command', () => {
   let mockedShellyService: ShellyService;
   beforeEach(() => {
     mockedShellyService = mock<ShellyService>({
+      ingestFile: jest.fn().mockResolvedValue(docs),
       ingestDirectory: jest.fn().mockResolvedValue(docs),
       ingestGitHubRepo: jest.fn().mockResolvedValue(docs),
     });
@@ -31,6 +32,87 @@ describe('Ingest command', () => {
   afterEach(() => {
     jest.restoreAllMocks();
     jest.resetAllMocks();
+  });
+
+  describe('File', () => {
+    test.each`
+      verbose      | collection           | split        | chunkSize    | chunkOverlap | dryRyn
+      ${undefined} | ${undefined}         | ${undefined} | ${undefined} | ${undefined} | ${undefined}
+      ${true}      | ${'some-collection'} | ${undefined} | ${100}       | ${10}        | ${undefined}
+      ${true}      | ${'some-collection'} | ${true}      | ${100}       | ${10}        | ${true}
+    `(
+      'should call ShellyService.ask with the correct flags ($verbose, $collection, $split, $chunkSize, $chunkOverlap, $dryRun) and args',
+      async ({
+        verbose,
+        collection,
+        split,
+        chunkSize,
+        chunkOverlap,
+        dryRun,
+      }) => {
+        const stdoutSpy = jest
+          .spyOn(process.stdout, 'write')
+          .mockImplementation();
+
+        const filePath = '/home/rpidanny/data/file.txt';
+        const args = [
+          ...(collection ? ['--collection', collection] : []),
+          ...(verbose ? ['--verbose'] : []),
+          ...(split ? ['--split'] : []),
+          ...(chunkSize ? ['--chunkSize', `${chunkSize}`] : []),
+          ...(chunkOverlap ? ['--chunkOverlap', `${chunkOverlap}`] : []),
+          ...(dryRun ? ['--dryRun'] : []),
+          ...[`--file`, filePath],
+        ];
+
+        const ingestCommand = new Ingest(args, mockConfig);
+        await ingestCommand.init();
+
+        const answer = await ingestCommand.run();
+
+        expect(answer).toEqual(docs);
+        expect(Ingest.prototype.getShelly).toHaveBeenCalledTimes(1);
+        expect(Ingest.prototype.getShelly).toHaveBeenCalledWith(verbose);
+        expect(mockedShellyService.ingestFile).toHaveBeenCalledTimes(1);
+        expect(mockedShellyService.ingestFile).toHaveBeenCalledWith(
+          filePath,
+          collection ?? 'ShellyDefault',
+          split,
+          chunkSize ?? 400,
+          chunkOverlap ?? 50,
+          dryRun
+        );
+        expect(stdoutSpy).toHaveBeenCalledWith(
+          expect.stringMatching('Ingested 1 documents')
+        );
+      }
+    );
+
+    it('should throw error when ingest fails', async () => {
+      const error = new Error('Some error');
+      jest.restoreAllMocks();
+      jest.resetAllMocks();
+      jest.spyOn(process.stderr, 'write').getMockImplementation();
+
+      const mockedShellyService = mock<ShellyService>({
+        ingestFile: jest.fn().mockRejectedValue(error),
+      });
+
+      jest
+        .spyOn(Ingest.prototype, 'getShelly')
+        .mockResolvedValueOnce(mockedShellyService);
+
+      const filePath = '/home/rpidanny/data/file.txt';
+      const args = [`--file`, filePath];
+
+      const ingestCommand = new Ingest(args, mockConfig);
+
+      await ingestCommand.init();
+
+      await expect(ingestCommand.run()).rejects.toThrowError(error);
+
+      expect(mockedShellyService.ingestFile).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe('Directory', () => {

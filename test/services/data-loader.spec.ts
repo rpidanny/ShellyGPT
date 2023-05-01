@@ -6,8 +6,10 @@ import { DataLoaderService } from '../../src/services/data-loader/data-loader.se
 
 describe('DataLoaderService', () => {
   const rootPath = './test/data';
-  const dataPath = `${rootPath}/supported`;
-  const unsupportedDataPath = `${rootPath}/unsupported`;
+  const supportedDirPath = `${rootPath}/supported`;
+  const supportedFilePath = `${supportedDirPath}/txt/dijkstra.txt`;
+  const unsupportedDirPath = `${rootPath}/unsupported`;
+  const unsupportedFilePath = `${unsupportedDirPath}/abc.xyz`;
   const githubRepo = 'https://github.com/rpidanny/alfred-repository';
   const githubBranch = 'master';
 
@@ -21,7 +23,7 @@ describe('DataLoaderService', () => {
 
   describe('loadDirectory', () => {
     test(`should load directory with default options`, async () => {
-      const documents = await dataLoaderService.loadDirectory(dataPath);
+      const documents = await dataLoaderService.loadDirectory(supportedDirPath);
 
       expect(documents).toBeDefined();
       expect(documents).toBeInstanceOf(Array);
@@ -32,7 +34,9 @@ describe('DataLoaderService', () => {
         expect(document.pageContent).toBeDefined();
         expect(document.pageContent.length).toBeGreaterThan(0);
         expect(document.pageContent).not.toBe('');
-        expect(encoding.encode(document.pageContent).length).toBeLessThan(450);
+        expect(encoding.encode(document.pageContent).length).toBeGreaterThan(
+          500
+        );
       }
     });
 
@@ -44,7 +48,7 @@ describe('DataLoaderService', () => {
 
       // act
       const documents = await dataLoaderService.loadDirectory(
-        dataPath,
+        supportedDirPath,
         split,
         chunkSize,
         chunkOverlap
@@ -71,7 +75,10 @@ describe('DataLoaderService', () => {
       const split = false;
 
       // act
-      const documents = await dataLoaderService.loadDirectory(dataPath, split);
+      const documents = await dataLoaderService.loadDirectory(
+        supportedDirPath,
+        split
+      );
 
       // assert
       expect(documents).toBeDefined();
@@ -92,13 +99,73 @@ describe('DataLoaderService', () => {
     it('should handle loading documents with unsupported file extensions gracefully', async () => {
       // act
       const documents = await dataLoaderService.loadDirectory(
-        unsupportedDataPath
+        unsupportedDirPath
       );
 
       // assert
       expect(documents).toBeDefined();
       expect(documents).toBeInstanceOf(Array);
       expect(documents.length).toBe(0);
+    });
+  });
+
+  describe('loadFile', () => {
+    test.each([
+      `${supportedDirPath}/txt/dijkstra.txt`,
+      `${supportedDirPath}/md/openai-evals.md`,
+      `${supportedDirPath}/srt/the.big.bang.theory.s12e24.720p.bluray.srt`,
+    ])(`should load %p with default options`, async (filePath) => {
+      const documents = await dataLoaderService.loadFile(filePath);
+
+      expect(documents).toBeDefined();
+      expect(documents).toBeInstanceOf(Array);
+      expect(documents.length).toEqual(1);
+      expect(documents[0]).toBeInstanceOf(Document);
+      expect(documents[0].pageContent).toBeDefined();
+      expect(documents[0].pageContent.length).toBeGreaterThan(0);
+      expect(documents[0].pageContent).not.toBe('');
+      expect(encoding.encode(documents[0].pageContent).length).toBeGreaterThan(
+        500
+      );
+    });
+
+    it('should load from file and split documents with custom options', async () => {
+      // arrange
+      const split = true;
+      const chunkSize = 200;
+      const chunkOverlap = 100;
+
+      // act
+      const documents = await dataLoaderService.loadFile(
+        supportedFilePath,
+        split,
+        chunkSize,
+        chunkOverlap
+      );
+
+      // assert
+      expect(documents).toBeDefined();
+      expect(documents).toBeInstanceOf(Array);
+      expect(documents.length).toEqual(20);
+      expect(documents[0]).toBeInstanceOf(Document);
+      expect(documents[0].pageContent).toBeDefined();
+      expect(documents[0].pageContent).not.toBe('');
+      expect(encoding.encode(documents[0].pageContent).length).toBeLessThan(
+        chunkSize + chunkOverlap
+      );
+    });
+
+    it("should throw error when file type isn't supported", async () => {
+      await expect(
+        dataLoaderService.loadFile(unsupportedFilePath)
+      ).rejects.toThrow(`Unsupported file extension: .xyz`);
+    });
+
+    it("should throw error when file doesn't exist", async () => {
+      const filePath = `${supportedDirPath}/${Date.now()}.txt`;
+      await expect(dataLoaderService.loadFile(filePath)).rejects.toThrow(
+        `File doesn't exist: ${filePath}`
+      );
     });
   });
 

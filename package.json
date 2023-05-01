@@ -25,7 +25,7 @@
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts --config .eslintrc",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:watch:test": "NODE_OPTIONS=--experimental-vm-modules jest --watch ./test/utils/shell.spec.ts",
+    "test:watch:test": "NODE_OPTIONS=--experimental-vm-modules jest --watch ./test/commands/ingest.spec.ts",
     "prepack": "npm run build && oclif manifest && npm run version",
     "pack:macos": "oclif pack macos",
     "pack:win": "oclif pack win",
@@ -120,7 +120,8 @@
       "chat": [
         "./dist/hooks/chat/store",
         "./dist/hooks/chat/print"
-      ]
+      ],
+      "command_not_found": "./dist/hooks/command_not_found/pretty-error"
     },
     "macos": {
       "identifier": "com.rpidanny.shelly"
