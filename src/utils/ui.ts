@@ -54,3 +54,27 @@ export function printChatMessage(
     )
   );
 }
+
+export function printInvalidCommandMessage(
+  command: string,
+  log: (msg: string) => void
+): void {
+  log('');
+  log(
+    chalk.redBright(
+      `${chalk.bold.italic('Bazinga!')} The command "${chalk.bold(
+        command
+      )}" is as non-existent as a Higgs boson without a particle accelerator.`
+    )
+  );
+
+  log('');
+
+  log(
+    chalk.yellow(
+      `Please run ${chalk.bold(
+        `"shelly --help"`
+      )} to see the list of available commands.`
+    )
+  );
+}

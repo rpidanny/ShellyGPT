@@ -120,7 +120,8 @@
       "chat": [
         "./dist/hooks/chat/store",
         "./dist/hooks/chat/print"
-      ]
+      ],
+      "command_not_found": "./dist/hooks/command_not_found/pretty-error"
     },
     "macos": {
       "identifier": "com.rpidanny.shelly"
