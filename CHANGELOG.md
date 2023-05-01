@@ -1,3 +1,11 @@
+## [1.6.0](https://github.com/rpidanny/shelly/compare/v1.5.0...v1.6.0) (2023-05-01)
+
+
+### Features
+
+* add custom invalid command error message ([#17](https://github.com/rpidanny/shelly/issues/17)) ([b8f6413](https://github.com/rpidanny/shelly/commit/b8f64138105387d37ba5a1a8dbbb44d84da3ac3d))
+* add ingest individual file ([#16](https://github.com/rpidanny/shelly/issues/16)) ([4073774](https://github.com/rpidanny/shelly/commit/407377426b754b3b8c549d07230bd85faeb63828))
+
 ## [1.5.0](https://github.com/rpidanny/shelly/compare/v1.4.0...v1.5.0) (2023-04-30)
 
 
