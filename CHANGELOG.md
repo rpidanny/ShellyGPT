@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/rpidanny/shelly/compare/v1.6.0...v1.6.1) (2023-05-02)
+
+
+### Bug Fixes
+
+* file loader only loading small subset of extensions ([#19](https://github.com/rpidanny/shelly/issues/19)) ([f6f91f5](https://github.com/rpidanny/shelly/commit/f6f91f578ce14c666f1aa163de7e443c7e63296b))
+
 ## [1.6.0](https://github.com/rpidanny/shelly/compare/v1.5.0...v1.6.0) (2023-05-01)
 
 
