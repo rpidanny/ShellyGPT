@@ -62,11 +62,14 @@ export class DataLoaderService {
 
     const ext = path.extname(filePath).toLowerCase();
 
-    if (!(ext in this.extensionsMap)) {
-      throw new Error(`Unsupported file extension: ${ext}`);
+    // if extension is not supported, use text loader
+    let loader = this.extensionsMap['.txt'];
+
+    if (ext in this.extensionsMap) {
+      loader = this.extensionsMap[ext];
     }
 
-    const docs = await this.extensionsMap[ext](filePath).load();
+    const docs = await loader(filePath).load();
 
     if (!split) return docs;
 

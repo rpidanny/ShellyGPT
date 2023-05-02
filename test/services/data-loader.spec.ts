@@ -9,7 +9,7 @@ describe('DataLoaderService', () => {
   const supportedDirPath = `${rootPath}/supported`;
   const supportedFilePath = `${supportedDirPath}/txt/dijkstra.txt`;
   const unsupportedDirPath = `${rootPath}/unsupported`;
-  const unsupportedFilePath = `${unsupportedDirPath}/abc.xyz`;
+  const unsupportedFilePath = `${unsupportedDirPath}/luddites.ai`;
   const githubRepo = 'https://github.com/rpidanny/alfred-repository';
   const githubBranch = 'master';
 
@@ -114,6 +114,7 @@ describe('DataLoaderService', () => {
       `${supportedDirPath}/txt/dijkstra.txt`,
       `${supportedDirPath}/md/openai-evals.md`,
       `${supportedDirPath}/srt/the.big.bang.theory.s12e24.720p.bluray.srt`,
+      unsupportedFilePath,
     ])(`should load %p with default options`, async (filePath) => {
       const documents = await dataLoaderService.loadFile(filePath);
 
@@ -153,12 +154,6 @@ describe('DataLoaderService', () => {
       expect(encoding.encode(documents[0].pageContent).length).toBeLessThan(
         chunkSize + chunkOverlap
       );
-    });
-
-    it("should throw error when file type isn't supported", async () => {
-      await expect(
-        dataLoaderService.loadFile(unsupportedFilePath)
-      ).rejects.toThrow(`Unsupported file extension: .xyz`);
     });
 
     it("should throw error when file doesn't exist", async () => {
