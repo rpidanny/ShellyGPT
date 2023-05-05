@@ -1,3 +1,10 @@
+## [1.7.0](https://github.com/rpidanny/shelly/compare/v1.6.1...v1.7.0) (2023-05-05)
+
+
+### Features
+
+* add events create command ([#21](https://github.com/rpidanny/shelly/issues/21)) ([76c932c](https://github.com/rpidanny/shelly/commit/76c932c304ec7937871b785e8f6e70e53f951e1b))
+
 ## [1.6.1](https://github.com/rpidanny/shelly/compare/v1.6.0...v1.6.1) (2023-05-02)
 
 
