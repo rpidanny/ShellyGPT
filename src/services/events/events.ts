@@ -4,6 +4,6 @@ export class EventsService {
   constructor(private readonly dependencies: IEventsServiceDependencies) {}
 
   async create(input: string): Promise<string> {
-    return this.dependencies.tool.call(input);
+    return this.dependencies.iCalTool.call(input);
   }
 }
