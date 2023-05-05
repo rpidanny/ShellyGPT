@@ -23,7 +23,7 @@ describe('Ask command', () => {
     jest.resetAllMocks();
   });
 
-  test.only.each`
+  test.each`
     verbose      | collection           | expectedVerbose | expectedCollection
     ${undefined} | ${'some-collection'} | ${undefined}    | ${'some-collection'}
     ${undefined} | ${undefined}         | ${undefined}    | ${'ShellyDefault'}
