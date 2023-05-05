@@ -13,7 +13,7 @@ describe('PlannerService', () => {
 
   beforeEach(() => {
     dependencies = {
-      tool: mock<ICalTool>({
+      iCalTool: mock<ICalTool>({
         call: jest.fn().mockResolvedValue(createEventResult),
       }),
     };
@@ -24,7 +24,7 @@ describe('PlannerService', () => {
     it('should call the tool with the input and return the result', async () => {
       const input = 'input string';
       const result = await service.create(input);
-      expect(dependencies.tool.call).toHaveBeenCalledWith(input);
+      expect(dependencies.iCalTool.call).toHaveBeenCalledWith(input);
       expect(result).toEqual(createEventResult);
     });
   });

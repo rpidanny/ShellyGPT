@@ -10,7 +10,10 @@ import { ICalTool } from '../../utils/tools/ical.js';
 export default class Create extends BaseCommand<typeof Create> {
   static description = 'Create iCal events';
 
-  static examples = ['<%= config.bin %> <%= command.id %>'];
+  static examples = [
+    '<%= config.bin %> <%= command.id %> "create a two day travel plan to New York"',
+    '<%= config.bin %> <%= command.id %> "create a 3 week running plan for a 5k run starting at Oct 21, 2023"',
+  ];
 
   static flags = {
     verbose: Flags.boolean({
@@ -65,6 +68,6 @@ export default class Create extends BaseCommand<typeof Create> {
       verbose,
     });
 
-    return new EventsService({ tool: iCalTool });
+    return new EventsService({ iCalTool });
   }
 }
