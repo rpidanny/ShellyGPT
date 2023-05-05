@@ -17,6 +17,11 @@ export default class Create extends BaseCommand<typeof Create> {
       char: 'v',
       description: 'enable verbose mode',
     }),
+    outputDir: Flags.string({
+      char: 'o',
+      description: 'Output directory to store the generated iCal event',
+      default: './',
+    }),
   };
 
   static args = {
@@ -28,12 +33,12 @@ export default class Create extends BaseCommand<typeof Create> {
   };
 
   public async run(): Promise<string> {
-    const { verbose } = this.flags;
+    const { verbose, outputDir } = this.flags;
     const { description } = this.args;
 
     ux.action.start('running');
 
-    const service = await this.getEventsService(verbose);
+    const service = await this.getEventsService(outputDir, verbose);
 
     const resp = await service.create(description);
 
@@ -44,7 +49,10 @@ export default class Create extends BaseCommand<typeof Create> {
     return resp;
   }
 
-  async getEventsService(verbose: boolean): Promise<EventsService> {
+  async getEventsService(
+    outputDir: string,
+    verbose: boolean
+  ): Promise<EventsService> {
     const llm = new OpenAIChat({
       openAIApiKey: this.localConfig.openAi.apiKey,
       modelName: this.localConfig.openAi.chatModel,
@@ -52,7 +60,7 @@ export default class Create extends BaseCommand<typeof Create> {
     });
 
     const iCalTool = new ICalTool({
-      store: new NodeFileStore(process.cwd()),
+      store: new NodeFileStore(outputDir),
       llm,
       verbose,
     });

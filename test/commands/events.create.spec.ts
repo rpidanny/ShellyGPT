@@ -37,7 +37,7 @@ describe('Events - Create', () => {
 
       const result = await planner.run();
 
-      expect(getEventsService).toHaveBeenCalledWith(true);
+      expect(getEventsService).toHaveBeenCalledWith('./', true);
       expect(actionStartSpy).toHaveBeenCalledWith('running');
       expect(actionStopSpy).toHaveBeenCalled();
       expect(logSpy).toHaveBeenCalledWith(`${chalk.green(planResult)}`);
@@ -47,7 +47,7 @@ describe('Events - Create', () => {
 
   describe('getEventsService', () => {
     it('should create and return a new instance of PlannerService', async () => {
-      const service = await planner.getEventsService(false);
+      const service = await planner.getEventsService('./', false);
 
       expect(service).toBeInstanceOf(EventsService);
     });
