@@ -1,8 +1,8 @@
 import { Command, ux } from '@oclif/core';
 import chalk from 'chalk';
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import inquirer from 'inquirer';
-import * as path from 'path';
+import path from 'path';
 
 import { TConfig } from '../../config/schema.js';
 import {
@@ -97,9 +97,11 @@ export default class Configure extends Command {
       }),
       username: await ux.prompt(chalk.bold('Enter Milvus username'), {
         default: defaultConfig?.username,
+        required: false,
       }),
       password: await ux.prompt(chalk.bold('Enter Milvus password'), {
         default: defaultConfig?.password,
+        required: false,
       }),
     };
     return milvus;
