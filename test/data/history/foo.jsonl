@@ -1,0 +1,2 @@
+{"date":"2020-01-01T00:00:00.000Z","sender":"AI","collection":"foo","message":"Ping"}
+{"date":"2020-01-01T00:01:00.000Z","sender":"User","collection":"foo","message":"Pong"}

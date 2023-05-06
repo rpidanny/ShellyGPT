@@ -1,5 +1,5 @@
 import bannerHook from '../../../src/hooks/init/banner';
-import ui from '../../../src/utils/ui';
+import uiOutput from '../../../src/utils/ui/output';
 import { getMockConfig } from '../../fixtures/config';
 
 describe('Hooks - init:banner', () => {
@@ -14,8 +14,8 @@ describe('Hooks - init:banner', () => {
     };
   });
 
-  it('should call ui.printBanner', async () => {
-    jest.spyOn(ui, 'printBanner');
+  it('should call uiOutput.printBanner', async () => {
+    jest.spyOn(uiOutput, 'printBanner');
 
     await bannerHook.call(oclifContext, {
       id: 'init',
@@ -23,7 +23,10 @@ describe('Hooks - init:banner', () => {
       config: mockConfig,
     });
 
-    expect(ui.printBanner).toHaveBeenCalledTimes(1);
-    expect(ui.printBanner).toHaveBeenCalledWith('1.2.3', oclifContext.log);
+    expect(uiOutput.printBanner).toHaveBeenCalledTimes(1);
+    expect(uiOutput.printBanner).toHaveBeenCalledWith(
+      '1.2.3',
+      oclifContext.log
+    );
   });
 });

@@ -1,7 +1,7 @@
 import path from 'path';
 
 import configHook from '../../../src/hooks/init/config';
-import ui from '../../../src/utils/ui';
+import uiOutput from '../../../src/utils/ui/output';
 import { getMockConfig } from '../../fixtures/config';
 
 describe('Hooks - init:config', () => {
@@ -26,7 +26,7 @@ describe('Hooks - init:config', () => {
   });
 
   it('should succeed when valid config is present', async () => {
-    jest.spyOn(ui, 'printConfigurationError');
+    jest.spyOn(uiOutput, 'printConfigurationError');
 
     await expect(
       configHook.call(oclifContext, {
@@ -36,11 +36,11 @@ describe('Hooks - init:config', () => {
       })
     ).resolves.not.toThrow();
 
-    expect(ui.printConfigurationError).not.toHaveBeenCalled();
+    expect(uiOutput.printConfigurationError).not.toHaveBeenCalled();
   });
 
-  it("should call this.exit and ui.printConfigurationError when config doesn't exist", async () => {
-    jest.spyOn(ui, 'printConfigurationError');
+  it("should call this.exit and uiOutput.printConfigurationError when config doesn't exist", async () => {
+    jest.spyOn(uiOutput, 'printConfigurationError');
 
     await expect(
       configHook.call(
@@ -56,11 +56,11 @@ describe('Hooks - init:config', () => {
       )
     ).resolves.not.toThrow();
 
-    expect(ui.printConfigurationError).toHaveBeenCalledTimes(1);
+    expect(uiOutput.printConfigurationError).toHaveBeenCalledTimes(1);
   });
 
-  it('should call this.exit and ui.printConfigurationError when invalid config', async () => {
-    jest.spyOn(ui, 'printConfigurationError');
+  it('should call this.exit and uiOutput.printConfigurationError when invalid config', async () => {
+    jest.spyOn(uiOutput, 'printConfigurationError');
 
     await expect(
       configHook.call(
@@ -79,6 +79,6 @@ describe('Hooks - init:config', () => {
       )
     ).resolves.not.toThrow();
 
-    expect(ui.printConfigurationError).toHaveBeenCalledTimes(1);
+    expect(uiOutput.printConfigurationError).toHaveBeenCalledTimes(1);
   });
 });

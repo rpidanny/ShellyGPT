@@ -5,7 +5,7 @@ import { VectorStore } from 'langchain/vectorstores';
 import { Milvus } from 'langchain/vectorstores/milvus';
 import { PineconeStore } from 'langchain/vectorstores/pinecone';
 
-import { VectorStores } from './enums.js';
+import { VectorStores } from '../../config/enums.js';
 import { IVectorStoreConfig } from './interface.js';
 
 export class VectorStoreService {

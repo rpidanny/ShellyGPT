@@ -3,8 +3,8 @@ import figlet from 'figlet';
 import { marked } from 'marked';
 import TerminalRenderer from 'marked-terminal';
 
-import { IChatMessage } from '../hooks/chat/interfaces.js';
-import { Sender } from './sender.enums.js';
+import { IChatMessage } from '../../hooks/chat/interfaces.js';
+import { Sender } from '../sender.enums.js';
 
 marked.setOptions({
   renderer: new TerminalRenderer(),

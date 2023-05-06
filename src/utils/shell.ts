@@ -1,7 +1,7 @@
 import { exec, spawn } from 'child_process';
 import { promisify } from 'util';
 
-export async function runCommand(command: string): Promise<string> {
+async function runCommand(command: string): Promise<string> {
   const execAsync = promisify(exec);
 
   try {
@@ -13,7 +13,7 @@ export async function runCommand(command: string): Promise<string> {
   }
 }
 
-export async function runCommandWithStream(
+async function runCommandWithStream(
   command: string,
   onStdOut: (msg: string) => void,
   onStrErr: (msg: string) => void
@@ -43,3 +43,8 @@ export async function runCommandWithStream(
     });
   });
 }
+
+export default {
+  runCommand,
+  runCommandWithStream,
+};
