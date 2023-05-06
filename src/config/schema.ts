@@ -4,8 +4,8 @@ import { z } from 'zod';
 import {
   OpenAIChatModel,
   OpenAIEmbeddingsModel,
-} from '../services/shelly/enums.js';
-import { VectorStores } from '../services/vector-store/enums.js';
+  VectorStores,
+} from './enums.js';
 
 const OpenAIConfigSchema = z.object({
   apiKey: z.string({

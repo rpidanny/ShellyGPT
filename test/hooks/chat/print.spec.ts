@@ -1,5 +1,5 @@
 import printChatHook from '../../../src/hooks/chat/print';
-import ui from '../../../src/utils/ui';
+import uiOutput from '../../../src/utils/ui/output';
 import { getSampleChat } from '../../fixtures/chat.hooks';
 import { getMockConfig } from '../../fixtures/config';
 
@@ -16,8 +16,8 @@ describe('Hooks - chat:print', () => {
     };
   });
 
-  it('should call ui.printChatMessage', async () => {
-    jest.spyOn(ui, 'printChatMessage');
+  it('should call uiOutput.printChatMessage', async () => {
+    jest.spyOn(uiOutput, 'printChatMessage');
 
     await printChatHook.call(oclifContext, {
       id: 'ask',
@@ -26,8 +26,8 @@ describe('Hooks - chat:print', () => {
       chat: sampleChat,
     });
 
-    expect(ui.printChatMessage).toHaveBeenCalledTimes(1);
-    expect(ui.printChatMessage).toHaveBeenCalledWith(
+    expect(uiOutput.printChatMessage).toHaveBeenCalledTimes(1);
+    expect(uiOutput.printChatMessage).toHaveBeenCalledWith(
       sampleChat,
       oclifContext.log
     );

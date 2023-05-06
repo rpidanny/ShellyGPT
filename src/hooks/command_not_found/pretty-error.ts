@@ -1,9 +1,9 @@
 import { Hook } from '@oclif/core';
 
-import ui from '../../utils/ui.js';
+import uiOutput from '../../utils/ui/output.js';
 
 const hook: Hook<'command_not_found'> = async function (opts) {
-  ui.printInvalidCommandMessage(opts.id, this.log);
+  uiOutput.printInvalidCommandMessage(opts.id, this.log);
   this.exit(1);
 };
 

@@ -1,12 +1,12 @@
 import { Config } from '@oclif/core';
 import path from 'path';
 
-import { TConfig } from '../../src/config/schema.js';
 import {
   OpenAIChatModel,
   OpenAIEmbeddingsModel,
-} from '../../src/services/shelly/enums.js';
-import { VectorStores } from '../../src/services/vector-store/enums.js';
+  VectorStores,
+} from '../../src/config/enums.js';
+import { TConfig } from '../../src/config/schema.js';
 
 export function getMockLocalConfig(overrides?: Partial<TConfig>): TConfig {
   return {
@@ -32,6 +32,7 @@ export function getMockLocalConfig(overrides?: Partial<TConfig>): TConfig {
 export function getMockConfig(): Config {
   const mockConfig = new Config({ root: process.cwd(), ignoreManifest: true });
   mockConfig.configDir = path.join(process.cwd(), './test/data/configs');
+  mockConfig.dataDir = path.join(process.cwd(), './test/data');
 
   return mockConfig;
 }

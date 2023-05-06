@@ -1,5 +1,5 @@
 import prettyErrorHook from '../../../src/hooks/command_not_found/pretty-error';
-import ui from '../../../src/utils/ui';
+import uiOutput from '../../../src/utils/ui/output';
 import { getMockConfig } from '../../fixtures/config';
 
 describe('Hooks - command_not_found:pretty-error', () => {
@@ -15,8 +15,8 @@ describe('Hooks - command_not_found:pretty-error', () => {
     };
   });
 
-  it('should call ui.printInvalidCommandMessage', async () => {
-    jest.spyOn(ui, 'printInvalidCommandMessage');
+  it('should call uiOutput.printInvalidCommandMessage', async () => {
+    jest.spyOn(uiOutput, 'printInvalidCommandMessage');
 
     await prettyErrorHook.call(oclifContext, {
       id: 'invalid-command',
@@ -26,8 +26,8 @@ describe('Hooks - command_not_found:pretty-error', () => {
 
     expect(oclifContext.exit).toHaveBeenCalledTimes(1);
     expect(oclifContext.exit).toHaveBeenCalledWith(1);
-    expect(ui.printInvalidCommandMessage).toHaveBeenCalledTimes(1);
-    expect(ui.printInvalidCommandMessage).toHaveBeenCalledWith(
+    expect(uiOutput.printInvalidCommandMessage).toHaveBeenCalledTimes(1);
+    expect(uiOutput.printInvalidCommandMessage).toHaveBeenCalledWith(
       'invalid-command',
       oclifContext.log
     );

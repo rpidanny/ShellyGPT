@@ -1,9 +1,9 @@
 import { Hook } from '@oclif/core';
 
-import ui from '../../utils/ui.js';
+import uiOutput from '../../utils/ui/output.js';
 
 const hook: Hook<'init'> = async function () {
-  ui.printBanner(this.config.version, this.log);
+  uiOutput.printBanner(this.config.version, this.log);
 };
 
 export default hook;

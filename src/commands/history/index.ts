@@ -4,7 +4,7 @@ import path from 'path';
 
 import { BaseCommand } from '../../baseCommand.js';
 import { IChatMessage } from '../../hooks/chat/interfaces.js';
-import ui from '../../utils/ui.js';
+import uiOutput from '../../utils/ui/output.js';
 
 export default class History extends BaseCommand<typeof History> {
   static enableJsonFlag = false;
@@ -40,7 +40,7 @@ export default class History extends BaseCommand<typeof History> {
       for (const line of history.split('\n')) {
         if (!line || line === '') continue;
         const chat: IChatMessage = JSON.parse(line);
-        ui.printChatMessage(chat, (msg) => this.log(msg));
+        uiOutput.printChatMessage(chat, (msg) => this.log(msg));
       }
     } catch (err) {
       this.log(`No history for this collection.`);
