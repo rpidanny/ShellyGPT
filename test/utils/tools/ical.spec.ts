@@ -8,16 +8,7 @@ import {
   getInputPrompt,
   getOutputPrompt,
 } from '../../fixtures/ical.tool';
-
-class FakeLLM extends LLM {
-  _llmType() {
-    return 'fake';
-  }
-
-  async _call(prompt: string): Promise<string> {
-    return prompt;
-  }
-}
+import { getMockLLM } from '../../fixtures/llm';
 
 describe('ICalTool', () => {
   let tool: ICalTool;
@@ -36,7 +27,7 @@ describe('ICalTool', () => {
       writeFile: jest.fn(),
       readFile: jest.fn(),
     };
-    llm = new FakeLLM({});
+    llm = getMockLLM();
     tool = new ICalTool({ store, llm });
   });
 

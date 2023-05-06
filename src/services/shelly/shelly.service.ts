@@ -8,6 +8,9 @@ import { OpenAIChat } from 'langchain/llms/openai';
 import { TConfig } from '../../config/schema.js';
 import { IModelOptions, IShellyDependencies } from './interfaces.js';
 
+/**
+ * @deprecated Use IngestService, AskService instead
+ */
 export class ShellyService {
   private embeddings!: Embeddings;
 

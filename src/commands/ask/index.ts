@@ -1,8 +1,9 @@
 import { Args, Flags, ux } from '@oclif/core';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+import { OpenAIChat } from 'langchain/llms/openai';
 
 import { BaseCommand } from '../../baseCommand.js';
-import { DataLoaderService } from '../../services/data-loader/data-loader.service.js';
-import { ShellyService } from '../../services/shelly/shelly.service.js';
+import { AskService } from '../../services/ask/ask.js';
 import { VectorStoreService } from '../../services/vector-store/vector-store.service.js';
 import { Sender } from '../../utils/sender.enums.js';
 
@@ -40,9 +41,9 @@ export default class Ask extends BaseCommand<typeof Ask> {
 
     ux.action.start('running');
 
-    const shelly = await this.getShelly(verbose);
+    const shelly = await this.getAskService(verbose);
 
-    const answer = await shelly.ask(question, collection);
+    const answer = await shelly.askAboutCollection(question, collection);
 
     ux.action.stop();
 
@@ -51,14 +52,19 @@ export default class Ask extends BaseCommand<typeof Ask> {
     return answer;
   }
 
-  async getShelly(verbose: boolean): Promise<ShellyService> {
+  async getAskService(verbose: boolean): Promise<AskService> {
+    const llm = new OpenAIChat({
+      openAIApiKey: this.localConfig.openAi.apiKey,
+      modelName: this.localConfig.openAi.chatModel,
+      verbose,
+    });
+    const embeddings = new OpenAIEmbeddings({
+      openAIApiKey: this.localConfig.openAi.apiKey,
+      modelName: this.localConfig.openAi.embeddingsModel,
+      verbose,
+    });
     const vectorStoreService = new VectorStoreService(this.localConfig);
-    const dataLoaderService = new DataLoaderService();
-    return new ShellyService(
-      { dataLoaderService, vectorStoreService },
-      this.localConfig,
-      verbose
-    );
+    return new AskService({ vectorStoreService, llm, embeddings });
   }
 
   private async emitMessageEvent(
