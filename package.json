@@ -24,7 +24,7 @@
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts --config .eslintrc",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
     "test:watch:test": "NODE_OPTIONS=--experimental-vm-modules jest --watch ./test/utils/tools/ical.spec.ts",
     "prepack": "npm run build && oclif manifest && npm run version",
     "pack:macos": "oclif pack macos",
