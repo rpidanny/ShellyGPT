@@ -1,3 +1,5 @@
+## [1.7.1](https://github.com/rpidanny/shelly/compare/v1.7.0...v1.7.1) (2023-05-06)
+
 ## [1.7.0](https://github.com/rpidanny/shelly/compare/v1.6.1...v1.7.0) (2023-05-05)
 
 

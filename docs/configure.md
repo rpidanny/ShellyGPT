@@ -20,4 +20,4 @@ EXAMPLES
   $ shelly configure
 ```
 
-_See code: [dist/commands/configure/index.ts](https://github.com/rpidanny/shelly/blob/v1.7.0/dist/commands/configure/index.ts)_
+_See code: [dist/commands/configure/index.ts](https://github.com/rpidanny/shelly/blob/v1.7.1/dist/commands/configure/index.ts)_
