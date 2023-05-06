@@ -50,4 +50,4 @@ EXAMPLES
   $ shelly ingest --collection=foo --githubRepo="https://github.com/rpidanny/shelly"
 ```
 
-_See code: [dist/commands/ingest/index.ts](https://github.com/rpidanny/shelly/blob/v1.7.3/dist/commands/ingest/index.ts)_
+_See code: [dist/commands/ingest/index.ts](https://github.com/rpidanny/shelly/blob/v1.7.4/dist/commands/ingest/index.ts)_

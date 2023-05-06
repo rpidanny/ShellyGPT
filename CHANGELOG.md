@@ -1,3 +1,10 @@
+## [1.7.4](https://github.com/rpidanny/shelly/compare/v1.7.3...v1.7.4) (2023-05-06)
+
+
+### Bug Fixes
+
+* **deps:** bump ical-generator from 4.0.0 to 4.1.0 ([#31](https://github.com/rpidanny/shelly/issues/31)) ([0f2d2d3](https://github.com/rpidanny/shelly/commit/0f2d2d3dadae8c30ebd879ae904dd25879642e5f))
+
 ## [1.7.3](https://github.com/rpidanny/shelly/compare/v1.7.2...v1.7.3) (2023-05-06)
 
 ## [1.7.2](https://github.com/rpidanny/shelly/compare/v1.7.1...v1.7.2) (2023-05-06)
