@@ -1,20 +1,18 @@
-import { Config } from '@oclif/core';
 import { mock } from 'jest-mock-extended';
 import { Document } from 'langchain/document';
-import path from 'path';
 
 import Ingest from '../../src/commands/ingest/index.js';
 import { IngestService } from '../../src/services/ingest';
+import { getMockConfig } from '../fixtures/config';
 
 describe('Ingest command', () => {
+  const mockConfig = getMockConfig();
   const docs: Document[] = [
     {
       pageContent: 'some-text',
       metadata: {},
     },
   ];
-  const mockConfig = new Config({ root: process.cwd(), ignoreManifest: true });
-  mockConfig.configDir = path.join(process.cwd(), './test/data');
 
   let mockIngestService: IngestService;
   beforeEach(() => {
@@ -23,6 +21,10 @@ describe('Ingest command', () => {
       ingestDirectory: jest.fn().mockResolvedValue(docs),
       ingestGitHubRepo: jest.fn().mockResolvedValue(docs),
     });
+
+    // Disable spam from console.log
+    jest.spyOn(process.stderr, 'write').mockImplementation();
+    jest.spyOn(process.stdout, 'write').mockImplementation();
   });
 
   afterEach(() => {
@@ -94,7 +96,8 @@ describe('Ingest command', () => {
       const error = new Error('Some error');
       jest.restoreAllMocks();
       jest.resetAllMocks();
-      jest.spyOn(process.stderr, 'write').getMockImplementation();
+      jest.spyOn(process.stderr, 'write').mockImplementation();
+      jest.spyOn(process.stdout, 'write').mockImplementation();
 
       const mockIngestService = mock<IngestService>({
         ingestFile: jest.fn().mockRejectedValue(error),
@@ -181,7 +184,8 @@ describe('Ingest command', () => {
       const error = new Error('Some error');
       jest.restoreAllMocks();
       jest.resetAllMocks();
-      jest.spyOn(process.stderr, 'write').getMockImplementation();
+      jest.spyOn(process.stderr, 'write').mockImplementation();
+      jest.spyOn(process.stdout, 'write').mockImplementation();
 
       const mockIngestService = mock<IngestService>({
         ingestDirectory: jest.fn().mockRejectedValue(error),
@@ -272,7 +276,8 @@ describe('Ingest command', () => {
       const error = new Error('Some error');
       jest.restoreAllMocks();
       jest.resetAllMocks();
-      jest.spyOn(process.stderr, 'write').getMockImplementation();
+      jest.spyOn(process.stderr, 'write').mockImplementation();
+      jest.spyOn(process.stdout, 'write').mockImplementation();
 
       const mockIngestService = mock<IngestService>({
         ingestGitHubRepo: jest.fn().mockRejectedValue(error),

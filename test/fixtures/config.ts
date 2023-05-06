@@ -1,3 +1,6 @@
+import { Config } from '@oclif/core';
+import path from 'path';
+
 import { TConfig } from '../../src/config/schema.js';
 import {
   OpenAIChatModel,
@@ -5,7 +8,7 @@ import {
 } from '../../src/services/shelly/enums.js';
 import { VectorStores } from '../../src/services/vector-store/enums.js';
 
-export function getMockConfig(overrides?: Partial<TConfig>): TConfig {
+export function getMockLocalConfig(overrides?: Partial<TConfig>): TConfig {
   return {
     openAi: {
       apiKey: 'some-key',
@@ -24,4 +27,11 @@ export function getMockConfig(overrides?: Partial<TConfig>): TConfig {
     },
     ...overrides,
   };
+}
+
+export function getMockConfig(): Config {
+  const mockConfig = new Config({ root: process.cwd(), ignoreManifest: true });
+  mockConfig.configDir = path.join(process.cwd(), './test/data/configs');
+
+  return mockConfig;
 }

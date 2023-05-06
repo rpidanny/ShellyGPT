@@ -10,7 +10,7 @@ marked.setOptions({
   renderer: new TerminalRenderer(),
 });
 
-export function printBanner(version: string, log: (msg: string) => void): void {
+function printBanner(version: string, log: (msg: string) => void): void {
   log(
     `${chalk.bold.hex('#0077be')(
       figlet.textSync(`Shelly`, {
@@ -20,7 +20,7 @@ export function printBanner(version: string, log: (msg: string) => void): void {
   );
 }
 
-export function printConfigurationError(log: (msg: string) => void): void {
+function printConfigurationError(log: (msg: string) => void): void {
   log(
     chalk.yellow(
       `${chalk.bold.italic(
@@ -38,7 +38,7 @@ export function printConfigurationError(log: (msg: string) => void): void {
   );
 }
 
-export function printChatMessage(
+function printChatMessage(
   chat: IChatMessage,
   log: (msg: string) => void
 ): void {
@@ -55,7 +55,7 @@ export function printChatMessage(
   );
 }
 
-export function printInvalidCommandMessage(
+function printInvalidCommandMessage(
   command: string,
   log: (msg: string) => void
 ): void {
@@ -78,3 +78,10 @@ export function printInvalidCommandMessage(
     )
   );
 }
+
+export default {
+  printBanner,
+  printConfigurationError,
+  printChatMessage,
+  printInvalidCommandMessage,
+};

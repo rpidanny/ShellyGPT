@@ -1,7 +1,7 @@
-import { LLM } from 'langchain/llms';
+import { LLM } from 'langchain/llms/base';
 
 export class FakeLLM extends LLM {
-  _llmType() {
+  _llmType(): string {
     return 'fake';
   }
 

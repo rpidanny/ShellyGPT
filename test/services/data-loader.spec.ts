@@ -16,6 +16,12 @@ describe('DataLoaderService', () => {
   let dataLoaderService: DataLoaderService;
   let encoding: Tiktoken;
 
+  beforeAll(() => {
+    // Disable spam from console.log
+    jest.spyOn(process.stdout, 'write').mockImplementation();
+    jest.spyOn(process.stderr, 'write').mockImplementation();
+  });
+
   beforeEach(() => {
     dataLoaderService = new DataLoaderService();
     encoding = get_encoding('cl100k_base');

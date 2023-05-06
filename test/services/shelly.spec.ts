@@ -4,7 +4,7 @@ import { Document } from 'langchain/document';
 import { DataLoaderService } from '../../src/services/data-loader/data-loader.service';
 import { ShellyService } from '../../src/services/shelly/shelly.service';
 import { VectorStoreService } from '../../src/services/vector-store/vector-store.service';
-import { getMockConfig } from '../fixtures/config';
+import { getMockLocalConfig } from '../fixtures/config';
 
 describe('Shelly Service', () => {
   let dataLoaderService: DataLoaderService;
@@ -13,7 +13,7 @@ describe('Shelly Service', () => {
   const docs: Document[] = [{ pageContent: 'some text', metadata: {} }];
   const githubRepo = 'https://github.com/rpidanny/alfred-repository';
   const githubBranch = 'master';
-  const mockConfig = getMockConfig();
+  const mockConfig = getMockLocalConfig();
 
   beforeEach(() => {
     dataLoaderService = mock<DataLoaderService>();

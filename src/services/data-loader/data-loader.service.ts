@@ -16,6 +16,7 @@ import path from 'path';
 export class DataLoaderService {
   private readonly extensionsMap: Record<
     string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (path: string) => BaseDocumentLoader
   > = {
     '.md': (path: string) => new TextLoader(path),

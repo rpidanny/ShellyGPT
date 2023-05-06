@@ -2,7 +2,7 @@ import { RetrievalQAChain } from 'langchain/chains';
 import { Document } from 'langchain/document';
 import { Embeddings } from 'langchain/embeddings';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { BaseLLM } from 'langchain/llms';
+import { BaseLLM } from 'langchain/llms/base';
 import { OpenAIChat } from 'langchain/llms/openai';
 
 import { TConfig } from '../../config/schema.js';

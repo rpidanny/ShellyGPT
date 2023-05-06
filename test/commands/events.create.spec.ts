@@ -1,13 +1,12 @@
-import { Config, ux } from '@oclif/core';
+import { ux } from '@oclif/core';
 import chalk from 'chalk';
-import path from 'path';
 
 import CreateEvents from '../../src/commands/events/create';
 import { EventsService } from '../../src/services/events/events';
+import { getMockConfig } from '../fixtures/config';
 
 describe('Events - Create', () => {
-  const mockConfig = new Config({ root: process.cwd(), ignoreManifest: true });
-  mockConfig.configDir = path.join(process.cwd(), './test/data');
+  const mockConfig = getMockConfig();
   const planResult = 'event.ics created';
 
   let createEventsCommand: CreateEvents;
@@ -19,10 +18,14 @@ describe('Events - Create', () => {
       mockConfig
     );
     await createEventsCommand.init();
+
+    jest.spyOn(process.stderr, 'write').mockImplementation();
+    jest.spyOn(process.stdout, 'write').mockImplementation();
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('run', () => {

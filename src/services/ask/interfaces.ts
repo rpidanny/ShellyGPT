@@ -1,5 +1,5 @@
 import { Embeddings } from 'langchain/embeddings';
-import { LLM } from 'langchain/llms';
+import { LLM } from 'langchain/llms/base';
 
 import { VectorStoreService } from '../vector-store/vector-store.service.js';
 

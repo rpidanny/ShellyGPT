@@ -2,7 +2,7 @@ import { mock } from 'jest-mock-extended';
 // import { FakeEmbeddings } from 'langchain/embeddings';
 import { Document } from 'langchain/document';
 import { Embeddings } from 'langchain/embeddings';
-import { LLM } from 'langchain/llms';
+import { LLM } from 'langchain/llms/base';
 import { VectorStoreRetriever } from 'langchain/vectorstores/base';
 
 import { AskService, IAskServiceDependencies } from '../../src/services/ask';

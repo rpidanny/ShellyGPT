@@ -4,7 +4,7 @@ import path from 'path';
 
 import { CONFIG_FILE_NAME } from '../../config/constants.js';
 import { ConfigSchema } from '../../config/schema.js';
-import { printConfigurationError } from '../../utils/ui.js';
+import ui from '../../utils/ui.js';
 
 const whiteListedCommands = ['configure', '--version', 'readme'];
 
@@ -17,7 +17,7 @@ const hook: Hook<'init'> = async function (opts) {
 
     ConfigSchema.parse(config);
   } catch (err) {
-    printConfigurationError(this.log);
+    ui.printConfigurationError(this.log);
     this.exit();
   }
 };

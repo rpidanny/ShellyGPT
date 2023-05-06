@@ -1,4 +1,4 @@
-import { BaseLLM, LLM } from 'langchain/llms/base';
+import { BaseLLM } from 'langchain/llms/base';
 import { BaseFileStore } from 'langchain/schema';
 
 import { ICalTool } from '../../../src/utils/tools/ical';

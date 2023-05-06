@@ -1,17 +1,17 @@
-import { Config } from '@oclif/core';
 import { mock } from 'jest-mock-extended';
-import path from 'path';
 
 import Ask from '../../src/commands/ask/index.js';
 import { AskService } from '../../src/services/ask';
+import { getMockConfig } from '../fixtures/config.js';
 
 describe('Ask command', () => {
   const mockedAnswer = 'You just use chatGPT';
-  const mockConfig = new Config({ root: process.cwd(), ignoreManifest: true });
-  mockConfig.configDir = path.join(process.cwd(), './test/data');
+  const mockConfig = getMockConfig();
 
   beforeAll(() => {
     jest.useFakeTimers().setSystemTime(new Date('2023-04-28'));
+    jest.spyOn(process.stderr, 'write').mockImplementation();
+    jest.spyOn(process.stdout, 'write').mockImplementation();
   });
 
   afterAll(() => {
@@ -31,8 +31,6 @@ describe('Ask command', () => {
   `(
     'should call askService.askAboutCollection and emit chat event with the correct params',
     async ({ verbose, collection, expectedVerbose, expectedCollection }) => {
-      jest.spyOn(process.stdout, 'write').mockImplementation();
-
       const mockedAskService = mock<AskService>({
         askAboutCollection: jest.fn().mockResolvedValue(mockedAnswer),
       });
