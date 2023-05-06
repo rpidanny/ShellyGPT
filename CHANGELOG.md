@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/rpidanny/shelly/compare/v1.7.1...v1.7.2) (2023-05-06)
+
+
+### Bug Fixes
+
+* **configure:** esm module import ([#24](https://github.com/rpidanny/shelly/issues/24)) ([ff8b748](https://github.com/rpidanny/shelly/commit/ff8b748132729cd4d3057c95165c27b8ab7766d1))
+
 ## [1.7.1](https://github.com/rpidanny/shelly/compare/v1.7.0...v1.7.1) (2023-05-06)
 
 ## [1.7.0](https://github.com/rpidanny/shelly/compare/v1.6.1...v1.7.0) (2023-05-05)
