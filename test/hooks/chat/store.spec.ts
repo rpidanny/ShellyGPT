@@ -3,7 +3,6 @@ import os from 'os';
 import path from 'path';
 
 import storeChatHook from '../../../src/hooks/chat/store';
-import ui from '../../../src/utils/ui';
 import { getSampleChat, getSampleChatHistory } from '../../fixtures/chat.hooks';
 import { getMockConfig } from '../../fixtures/config';
 
