@@ -1,17 +1,17 @@
-import { Config } from '@oclif/core';
 import { mock } from 'jest-mock-extended';
-import path from 'path';
 
 import Ask from '../../src/commands/ask/index.js';
-import { ShellyService } from '../../src/services/shelly/shelly.service.js';
+import { AskService } from '../../src/services/ask';
+import { getMockConfig } from '../fixtures/config.js';
 
 describe('Ask command', () => {
   const mockedAnswer = 'You just use chatGPT';
-  const mockConfig = new Config({ root: process.cwd(), ignoreManifest: true });
-  mockConfig.configDir = path.join(process.cwd(), './test/data');
+  const mockConfig = getMockConfig();
 
   beforeAll(() => {
-    jest.useFakeTimers().setSystemTime(new Date('20023-04-28'));
+    jest.useFakeTimers().setSystemTime(new Date('2023-04-28'));
+    jest.spyOn(process.stderr, 'write').mockImplementation();
+    jest.spyOn(process.stdout, 'write').mockImplementation();
   });
 
   afterAll(() => {
@@ -29,17 +29,15 @@ describe('Ask command', () => {
     ${undefined} | ${undefined}         | ${undefined}    | ${'ShellyDefault'}
     ${true}      | ${'some-collection'} | ${true}         | ${'some-collection'}
   `(
-    'should call ShellyService.ask and emit chat event with the correct params',
+    'should call askService.askAboutCollection and emit chat event with the correct params',
     async ({ verbose, collection, expectedVerbose, expectedCollection }) => {
-      jest.spyOn(process.stdout, 'write').mockImplementation();
-
-      const mockedShellyService = mock<ShellyService>({
-        ask: jest.fn().mockResolvedValue(mockedAnswer),
+      const mockedAskService = mock<AskService>({
+        askAboutCollection: jest.fn().mockResolvedValue(mockedAnswer),
       });
 
       jest
-        .spyOn(Ask.prototype, 'getShelly')
-        .mockResolvedValueOnce(mockedShellyService);
+        .spyOn(Ask.prototype, 'getAskService')
+        .mockResolvedValueOnce(mockedAskService);
 
       const question = 'How do I do something?';
       const args = [
@@ -56,10 +54,10 @@ describe('Ask command', () => {
       const answer = await askCommand.run();
 
       expect(answer).toEqual(mockedAnswer);
-      expect(Ask.prototype.getShelly).toHaveBeenCalledTimes(1);
-      expect(Ask.prototype.getShelly).toHaveBeenCalledWith(expectedVerbose);
-      expect(mockedShellyService.ask).toHaveBeenCalledTimes(1);
-      expect(mockedShellyService.ask).toHaveBeenCalledWith(
+      expect(Ask.prototype.getAskService).toHaveBeenCalledTimes(1);
+      expect(Ask.prototype.getAskService).toHaveBeenCalledWith(expectedVerbose);
+      expect(mockedAskService.askAboutCollection).toHaveBeenCalledTimes(1);
+      expect(mockedAskService.askAboutCollection).toHaveBeenCalledWith(
         question,
         expectedCollection
       );
@@ -83,18 +81,33 @@ describe('Ask command', () => {
     }
   );
 
+  describe('getAskService', () => {
+    it('should create and return a new instance of AskService', async () => {
+      const question = 'How do I do something?';
+      const args = [...['--collection', 'some-collection'], question];
+
+      const askCommand = new Ask(args, mockConfig);
+      await askCommand.init();
+
+      const service = await askCommand.getAskService(false);
+
+      expect(service).toBeInstanceOf(AskService);
+    });
+  });
+
+  // TODO: move to hooks
   it.skip.each(['ts', 'typescript', 'js', 'txt'])(
     'should render %p codeblocks',
     async (lang) => {
       const code = 'console.log("hello")';
       const ansWithCode = `some code with\n\`\`\`${lang}\n${code}\n\`\`\``;
 
-      const mockedShellyService = mock<ShellyService>({
-        ask: jest.fn().mockResolvedValue(ansWithCode),
+      const mockedAskService = mock<AskService>({
+        askAboutCollection: jest.fn().mockResolvedValue(ansWithCode),
       });
       jest
-        .spyOn(Ask.prototype, 'getShelly')
-        .mockResolvedValueOnce(mockedShellyService);
+        .spyOn(Ask.prototype, 'getAskService')
+        .mockResolvedValueOnce(mockedAskService);
       const stdoutSpy = jest
         .spyOn(process.stdout, 'write')
         .mockImplementation();
@@ -108,10 +121,10 @@ describe('Ask command', () => {
       const answer = await askCommand.run();
 
       expect(answer).toEqual(ansWithCode);
-      expect(Ask.prototype.getShelly).toHaveBeenCalledTimes(1);
-      expect(Ask.prototype.getShelly).toHaveBeenCalledWith(undefined);
-      expect(mockedShellyService.ask).toHaveBeenCalledTimes(1);
-      expect(mockedShellyService.ask).toHaveBeenCalledWith(
+      expect(Ask.prototype.getAskService).toHaveBeenCalledTimes(1);
+      expect(Ask.prototype.getAskService).toHaveBeenCalledWith(undefined);
+      expect(mockedAskService.askAboutCollection).toHaveBeenCalledTimes(1);
+      expect(mockedAskService.askAboutCollection).toHaveBeenCalledWith(
         question,
         'ShellyDefault'
       );

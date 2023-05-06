@@ -37,6 +37,11 @@
     "prerelease": "npm run version",
     "release": "semantic-release"
   },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint"
+    ]
+  },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.7",
     "@oclif/core": "^2",

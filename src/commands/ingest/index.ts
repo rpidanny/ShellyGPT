@@ -1,10 +1,11 @@
 import { Flags, ux } from '@oclif/core';
 import chalk from 'chalk';
 import { Document } from 'langchain/docstore';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 
 import { BaseCommand } from '../../baseCommand.js';
 import { DataLoaderService } from '../../services/data-loader/data-loader.service.js';
-import { ShellyService } from '../../services/shelly/shelly.service.js';
+import { IngestService } from '../../services/ingest/ingest.js';
 import { VectorStoreService } from '../../services/vector-store/vector-store.service.js';
 
 export default class Ingest extends BaseCommand<typeof Ingest> {
@@ -87,14 +88,14 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
       githubBranch,
     } = this.flags;
 
-    const shelly = await this.getShelly(verbose);
+    const service = await this.getIngestService(verbose);
     const dest = `${this.localConfig.vectorStore}/${collection}`;
 
     let docs: Document[] = [];
 
     if (file) {
       docs = await this.runIngestion('file', file, dest, docs, async () =>
-        shelly.ingestFile(
+        service.ingestFile(
           file,
           collection,
           split,
@@ -107,7 +108,7 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
 
     if (dir) {
       docs = await this.runIngestion('dir', dir, dest, docs, async () =>
-        shelly.ingestDirectory(
+        service.ingestDirectory(
           dir,
           collection,
           split,
@@ -125,7 +126,7 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
         dest,
         docs,
         async () =>
-          shelly.ingestGitHubRepo(
+          service.ingestGitHubRepo(
             githubRepo,
             githubBranch,
             collection,
@@ -141,14 +142,20 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
     return docs;
   }
 
-  async getShelly(verbose: boolean): Promise<ShellyService> {
+  async getIngestService(verbose: boolean): Promise<IngestService> {
     const vectorStoreService = new VectorStoreService(this.localConfig);
     const dataLoaderService = new DataLoaderService();
-    return new ShellyService(
-      { dataLoaderService, vectorStoreService },
-      this.localConfig,
-      verbose
-    );
+    const embeddings = new OpenAIEmbeddings({
+      openAIApiKey: this.localConfig.openAi.apiKey,
+      modelName: this.localConfig.openAi.embeddingsModel,
+      verbose,
+    });
+
+    return new IngestService({
+      dataLoaderService,
+      vectorStoreService,
+      embeddings,
+    });
   }
 
   private async runIngestion(

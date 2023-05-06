@@ -1,4 +1,4 @@
-import { BaseLLM } from 'langchain/llms';
+import { BaseLLM } from 'langchain/llms/base';
 import { StructuredOutputParser } from 'langchain/output_parsers';
 import { PromptTemplate } from 'langchain/prompts';
 import { BaseFileStore } from 'langchain/schema';

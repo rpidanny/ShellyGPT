@@ -1,11 +1,9 @@
-import { Config } from '@oclif/core';
-import path from 'path';
-
 import Get from '../../src/commands/config/get.js';
-import localConfig from '../data/config.json';
+import localConfig from '../data/configs/config.json';
+import { getMockConfig } from '../fixtures/config.js';
 
 describe('config get', () => {
-  const mockConfig = new Config({ root: process.cwd(), ignoreManifest: true });
+  const mockConfig = getMockConfig();
 
   afterEach(() => {
     jest.resetAllMocks();
@@ -14,7 +12,6 @@ describe('config get', () => {
   it('should print and return the local config', async () => {
     // Arrange
     const stdoutSpy = jest.spyOn(process.stdout, 'write').mockImplementation();
-    mockConfig.configDir = path.join(process.cwd(), './test/data');
     const getCommand = new Get([], mockConfig);
 
     // Act
