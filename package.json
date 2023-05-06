@@ -57,7 +57,7 @@
     "figlet": "^1.6.0",
     "fs-extra": "^11.1.1",
     "html-to-text": "^9.0.5",
-    "ical-generator": "^4.0.0",
+    "ical-generator": "^4.1.0",
     "inquirer": "^8.2.5",
     "langchain": "^0.0.66",
     "mammoth": "^1.5.1",
