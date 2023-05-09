@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/rpidanny/shelly/compare/v1.7.4...v1.7.5) (2023-05-09)
+
+
+### Bug Fixes
+
+* **deps:** update langchain and mulvus version ([#32](https://github.com/rpidanny/shelly/issues/32)) ([f617b6e](https://github.com/rpidanny/shelly/commit/f617b6e904fd532e77dc1ad4b4940407c174893d))
+
 ## [1.7.4](https://github.com/rpidanny/shelly/compare/v1.7.3...v1.7.4) (2023-05-06)
 
 
