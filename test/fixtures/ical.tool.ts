@@ -9,23 +9,20 @@ export function getInputPrompt(cmd: string): string {
 
 ${cmd}
 
-The output should be a markdown code snippet formatted in the following schema:
+You must format your output as a JSON value that adheres to a given "JSON Schema" instance.
 
+"JSON Schema" is a declarative language that allows you to annotate and validate JSON documents.
+
+For example, the example "JSON Schema" instance {{"properties": {{"foo": {{"description": "a list of test words", "type": "array", "items": {{"type": "string"}}}}}}, "required": ["foo"]}}}}
+would match an object with one required property, "foo". The "type" property specifies "foo" must be an "array", and the "description" property semantically describes it as "a list of test words". The items within "foo" must be strings.
+Thus, the object {{"foo": ["bar", "baz"]}} is a well-formatted instance of this example "JSON Schema". The object {{"properties": {{"foo": ["bar", "baz"]}}}} is not well-formatted.
+
+Your output will be parsed and type-checked according to the provided schema instance, so make sure all fields in your output match exactly!
+
+Here is the JSON Schema instance your output must adhere to:
 \`\`\`json
-{
-	"name": string // Name of the event event
-	"events": {
-		"start": string // Start date of the event
-		"end": string // Env date of the event
-		"summary": string // Summary of the event
-		"description": string // Description of the event
-		"location": string // Optional // Location of the event if any
-		"url": string // Optional // URL of the event if any
-	}[]
-}
+{"type":"object","properties":{"name":{"type":"string","description":"Name of the event event"},"events":{"type":"array","items":{"type":"object","properties":{"start":{"type":"string","description":"Start date of the event"},"end":{"type":"string","description":"Env date of the event"},"summary":{"type":"string","description":"Summary of the event"},"description":{"type":"string","description":"Description of the event"},"location":{"type":"string","description":"Location of the event if any"},"url":{"type":"string","description":"URL of the event if any"}},"required":["start","end","summary","description"],"additionalProperties":false}}},"required":["name","events"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}
 \`\`\`
-
-Including the leading and trailing \"\`\`\`json" and "\`\`\`\"
 `;
 }
 
