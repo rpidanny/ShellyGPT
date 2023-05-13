@@ -1,3 +1,10 @@
+## [1.7.7](https://github.com/rpidanny/shelly/compare/v1.7.6...v1.7.7) (2023-05-13)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/plugin-autocomplete from 2.1.9 to 2.2.0 ([#34](https://github.com/rpidanny/shelly/issues/34)) ([717a120](https://github.com/rpidanny/shelly/commit/717a1209e333a2b9e71dd1db376c7fe23d7717ac))
+
 ## [1.7.6](https://github.com/rpidanny/shelly/compare/v1.7.5...v1.7.6) (2023-05-13)
 
 
