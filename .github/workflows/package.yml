@@ -39,8 +39,11 @@ jobs:
           node-version: 18
           cache: 'npm'
 
-      - name: NPM Install
+      - name: NPM Install (cli)
         run: npm ci
+
+      - name: NPM Install (client)
+        run: npm ci --prefix ./client
 
       - run: npm run pack:${{ matrix.target }}
 
@@ -66,8 +69,11 @@ jobs:
           node-version: 18
           cache: 'npm'
 
-      - name: NPM Install
+      - name: NPM Install (cli)
         run: npm ci
+
+      - name: NPM Install (client)
+        run: npm ci --prefix ./client
 
       - run: npm run pack:macos
 

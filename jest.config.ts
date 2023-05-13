@@ -22,6 +22,7 @@ const config: JestConfigWithTsJest = {
   },
   testEnvironment: 'jest-environment-node',
   testPathIgnorePatterns: [
+    '<rootDir>/src/client',
     '<rootDir>/dist/',
     '<rootDir>/tmp/',
     '<rootDir>/node_modules/',
@@ -41,6 +42,7 @@ const config: JestConfigWithTsJest = {
     '<rootDir>/local_tests/',
     '<rootDir>/coverage/',
     '<rootDir>/src/utils/ui/',
+    '<rootDir>/src/client/',
   ],
   coverageThreshold: {
     global: {

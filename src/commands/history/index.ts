@@ -1,9 +1,7 @@
 import { Flags } from '@oclif/core';
-import fs from 'fs-extra';
-import path from 'path';
 
 import { BaseCommand } from '../../baseCommand.js';
-import { IChatMessage } from '../../hooks/chat/interfaces.js';
+import { HistoryService } from '../../services/history/history.js';
 import uiOutput from '../../utils/ui/output.js';
 
 export default class History extends BaseCommand<typeof History> {
@@ -30,20 +28,18 @@ export default class History extends BaseCommand<typeof History> {
     const { collection } = this.flags;
 
     try {
-      const historyFilePath = path.join(
-        this.config.dataDir,
-        'history',
-        `${collection}.jsonl`
-      );
-      const history = await fs.readFile(historyFilePath, 'utf-8');
+      const historyService = await this.getHistoryService();
+      const history = await historyService.getHistory(collection);
 
-      for (const line of history.split('\n')) {
-        if (!line || line === '') continue;
-        const chat: IChatMessage = JSON.parse(line);
-        uiOutput.printChatMessage(chat, (msg) => this.log(msg));
+      for (const line of history) {
+        uiOutput.printChatMessage(line, (msg) => this.log(msg));
       }
     } catch (err) {
       this.log(`No history for this collection.`);
     }
+  }
+
+  getHistoryService(): HistoryService {
+    return new HistoryService(this.config.dataDir);
   }
 }

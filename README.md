@@ -88,7 +88,7 @@ $ npm install -g @rpidanny/shelly
 $ shelly COMMAND
 running command...
 $ shelly (--version)
-@rpidanny/shelly/1.7.5 linux-x64 node-v18.16.0
+@rpidanny/shelly/1.7.5 darwin-arm64 node-v18.14.0
 $ shelly --help [COMMAND]
 USAGE
   $ shelly COMMAND
@@ -106,6 +106,7 @@ USAGE
 * [`shelly history`](docs/history.md) - Print history
 * [`shelly ingest`](docs/ingest.md) - Ingest directory to a vector store
 * [`shelly milvus`](docs/milvus.md) - Start local Milvus vector store
+* [`shelly serve`](docs/serve.md) - start the Shelly web service
 
 <!-- commandsstop -->
 
