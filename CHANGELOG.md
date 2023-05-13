@@ -1,3 +1,10 @@
+## [1.7.6](https://github.com/rpidanny/shelly/compare/v1.7.5...v1.7.6) (2023-05-13)
+
+
+### Bug Fixes
+
+* **deps:** bump @pinecone-database/pinecone from 0.0.14 to 0.1.5 ([#35](https://github.com/rpidanny/shelly/issues/35)) ([7f1eaf2](https://github.com/rpidanny/shelly/commit/7f1eaf20139ff550bed824b54207f044021ce230))
+
 ## [1.7.5](https://github.com/rpidanny/shelly/compare/v1.7.4...v1.7.5) (2023-05-09)
 
 

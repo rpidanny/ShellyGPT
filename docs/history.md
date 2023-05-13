@@ -29,4 +29,4 @@ EXAMPLES
   $ shelly history --collection=foo
 ```
 
-_See code: [dist/commands/history/index.ts](https://github.com/rpidanny/shelly/blob/v1.7.5/dist/commands/history/index.ts)_
+_See code: [dist/commands/history/index.ts](https://github.com/rpidanny/shelly/blob/v1.7.6/dist/commands/history/index.ts)_
