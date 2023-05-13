@@ -45,7 +45,7 @@
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.7",
     "@oclif/core": "^2",
-    "@oclif/plugin-autocomplete": "^2.1.9",
+    "@oclif/plugin-autocomplete": "^2.2.0",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-not-found": "^2.3.23",
     "@oclif/plugin-plugins": "^2.4.6",
