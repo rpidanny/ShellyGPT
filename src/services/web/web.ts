@@ -3,7 +3,6 @@ import chalk from 'chalk';
 import cors from 'cors';
 import express, { Express, Request, Response } from 'express';
 import { Server } from 'http';
-import path from 'path';
 
 import { Sender } from '../../utils/sender.enums.js';
 import { ILogger, IWebServiceDependencies } from './interfaces.js';
@@ -13,6 +12,7 @@ export class WebService {
   private server!: Server;
 
   constructor(
+    private readonly rootDir: string,
     private readonly dependencies: IWebServiceDependencies,
     private readonly logger: ILogger
   ) {
@@ -37,7 +37,7 @@ export class WebService {
   private init() {
     this.app.use(bodyParser.json());
     this.app.use(cors());
-    this.app.use(express.static(path.resolve('client', 'build')));
+    this.app.use(express.static(`${this.rootDir}/client/build`));
     this.app.use((req: Request, res: any, next: () => void) => {
       this.logger.log(
         `Incoming request ${chalk.bold(req.method)} ${chalk.bold(req.url)}`

@@ -10,6 +10,7 @@ import {
 } from '../../src/services/web/interfaces';
 import { WebService } from '../../src/services/web/web';
 
+const rootDir = process.cwd();
 // Mocked dependencies for the WebService
 const dependencies: IWebServiceDependencies = {
   askService: mock<AskService>(),
@@ -35,7 +36,7 @@ describe('WebService', () => {
   let webService: WebService;
 
   beforeAll(async () => {
-    webService = new WebService(dependencies, logger);
+    webService = new WebService(rootDir, dependencies, logger);
     await webService.start(port, collection);
   });
 
