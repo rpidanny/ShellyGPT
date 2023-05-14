@@ -1,12 +1,13 @@
 {
   "extends": "@tsconfig/recommended",
   "compilerOptions": {
+    "jsx": "react",
     "rootDirs": ["src"],
     "outDir": "dist",
     "target": "es2021",
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "lib": ["ES2021", "ES2022.Object"],
+    "lib": ["ES2021", "ES2022.Object", "DOM"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -19,8 +20,8 @@
   },
   "ts-node": {
     "esm": true,
-    "transpileOnly": true,
+    "transpileOnly": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "docs", "local_tests"]
+  "exclude": ["node_modules", "dist", "docs", "local_tests", "src/client"]
 }

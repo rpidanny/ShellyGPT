@@ -106,6 +106,7 @@ USAGE
 * [`shelly history`](docs/history.md) - Print history
 * [`shelly ingest`](docs/ingest.md) - Ingest directory to a vector store
 * [`shelly milvus`](docs/milvus.md) - Start local Milvus vector store
+* [`shelly serve`](docs/serve.md) - start the Shelly web service
 
 <!-- commandsstop -->
 
