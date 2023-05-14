@@ -1,3 +1,10 @@
+## [1.10.0](https://github.com/rpidanny/shelly/compare/v1.9.1...v1.10.0) (2023-05-14)
+
+
+### Features
+
+* print token count with estimated cost of ingest ([#41](https://github.com/rpidanny/shelly/issues/41)) ([9a1ddbb](https://github.com/rpidanny/shelly/commit/9a1ddbbb6ac4eba91773d1c79dd3f1e62fd98c0c))
+
 ## [1.9.1](https://github.com/rpidanny/shelly/compare/v1.9.0...v1.9.1) (2023-05-14)
 
 
