@@ -42,6 +42,7 @@ export default class Serve extends BaseCommand<typeof Serve> {
 
   getWebService(verbose: boolean): WebService {
     return new WebService(
+      this.config.root,
       {
         askService: this.getAskService(verbose),
         historyService: this.getHistoryService(),
