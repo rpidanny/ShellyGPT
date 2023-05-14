@@ -1,3 +1,10 @@
+## [1.9.0](https://github.com/rpidanny/shelly/compare/v1.8.0...v1.9.0) (2023-05-14)
+
+
+### Features
+
+* update UI ([#39](https://github.com/rpidanny/shelly/issues/39)) ([29e8437](https://github.com/rpidanny/shelly/commit/29e843707636a451f3a568e89d2ad17ec25edc11))
+
 ## [1.8.0](https://github.com/rpidanny/shelly/compare/v1.7.7...v1.8.0) (2023-05-14)
 
 
