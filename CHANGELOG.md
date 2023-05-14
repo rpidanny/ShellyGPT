@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/rpidanny/shelly/compare/v1.9.0...v1.9.1) (2023-05-14)
+
+
+### Bug Fixes
+
+* invalid root path ([#40](https://github.com/rpidanny/shelly/issues/40)) ([e27c8cb](https://github.com/rpidanny/shelly/commit/e27c8cb0e888d080532403a7f87d184083a9dc3d))
+
 ## [1.9.0](https://github.com/rpidanny/shelly/compare/v1.8.0...v1.9.0) (2023-05-14)
 
 
