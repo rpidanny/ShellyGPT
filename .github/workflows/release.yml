@@ -52,8 +52,11 @@ jobs:
           node-version: ${{env.NODE_VERSION}}
           cache: 'npm'
 
-      - name: NPM Install
+      - name: NPM Install (cli)
         run: npm ci
+
+      - name: NPM Install (client)
+        run: npm ci --prefix ./client
 
       - name: NPM Build
         run: npm run build --if-present
