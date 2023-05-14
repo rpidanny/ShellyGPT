@@ -64,7 +64,7 @@
     "html-to-text": "^9.0.5",
     "ical-generator": "^4.1.0",
     "inquirer": "^8.2.5",
-    "langchain": "^0.0.71",
+    "langchain": "^0.0.75",
     "mammoth": "^1.5.1",
     "marked": "^4.3.0",
     "marked-terminal": "^5.1.1",
