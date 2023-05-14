@@ -1,7 +1,7 @@
 import './styles.css';
 
 import { SendOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Input, List, message } from 'antd';
+import { Avatar, Input, List, message, Spin, Typography } from 'antd';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -10,21 +10,26 @@ import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import sheldon from '../../assets/sheldon_mid.png';
 import axios from '../../axios';
 
+const { Text } = Typography;
 interface IMessage {
   text: string;
   sender: string;
-  timestamp: string;
+  date: string;
 }
 
 interface IChatRoomProps {
   history: IMessage[];
 }
 
-function ChatRoom({ history }: IChatRoomProps) {
+function ChatRoom({ history }: IChatRoomProps): JSX.Element {
+  const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<IMessage[]>(history);
   const [newMessage, setNewMessage] = useState<string>('');
   const chatRoomRef = useRef<HTMLDivElement>(null);
   const messageInputRef = useRef<HTMLTextAreaElement>(null);
+
+  // const { setLoading } = useContext<ILoadingContextType>(LoadingContext);
+  console.log('History: ', history);
 
   useEffect(() => {
     setMessages(history);
@@ -40,30 +45,37 @@ function ChatRoom({ history }: IChatRoomProps) {
     setNewMessage(event.target.value);
   }
 
-  function handleSendMessage() {
+  async function handleSendMessage() {
     if (newMessage.trim() !== '') {
+      setLoading(true);
       const newMessages = [
         ...messages,
         {
           text: newMessage,
           sender: 'user',
-          timestamp: new Date().toISOString(),
+          date: new Date().toUTCString(),
         },
       ];
       setMessages(newMessages);
       setNewMessage('');
 
+      // await new Promise((resolve) => setTimeout(resolve, 5000));
+      // setLoading(false);
+
       axios
         .post('/api/chat', { message: newMessage })
         .then((response) => {
           if (response.status === 200) {
-            const { text, sender, timestamp } = response.data;
-            setMessages([...messages, { text, sender, timestamp }]);
+            const { text, sender, date } = response.data;
+            setMessages([...newMessages, { text, sender, date }]);
           }
         })
         .catch((error) => {
           console.error(error);
           message.error('Failed to send message');
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }
@@ -75,9 +87,12 @@ function ChatRoom({ history }: IChatRoomProps) {
     }
   }
 
-  function renderItem({ text, sender }: IMessage) {
+  function renderItem({ text, sender, date }: IMessage): JSX.Element {
     return (
-      <List.Item className="message-bubble">
+      <List.Item
+        className="message-bubble"
+        // style={{ backgroundColor: sender === 'user' ? '#eeeeee' : 'white' }}
+      >
         <List.Item.Meta
           avatar={
             sender === 'user' ? (
@@ -86,33 +101,37 @@ function ChatRoom({ history }: IChatRoomProps) {
               <Avatar src={sheldon} />
             )
           }
-          description={
-            <ReactMarkdown
-              components={{
-                code({ node, inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '');
-                  return !inline && match ? (
-                    <SyntaxHighlighter
-                      {...props}
-                      // children={String(children).replace(/\n$/, '')}
-                      style={dark}
-                      language={match[1]}
-                      PreTag="div"
-                    >
-                      {String(children)}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code {...props} className={className}>
-                      {children}
-                    </code>
-                  );
-                },
-              }}
-            >
-              {text}
-            </ReactMarkdown>
-          }
+          description={date}
         />
+        <ReactMarkdown
+          className="markdown"
+          components={{
+            code({ node, inline, className, children, ...props }) {
+              const match = /language-(\w+)/.exec(className || '');
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  {...props}
+                  // children={String(children).replace(/\n$/, '')}
+                  style={dark}
+                  language={match[1]}
+                  PreTag="div"
+                >
+                  {String(children)}
+                </SyntaxHighlighter>
+              ) : (
+                <code
+                  {...props}
+                  className={className}
+                  style={{ textAlign: 'left' }}
+                >
+                  {children}
+                </code>
+              );
+            },
+          }}
+        >
+          {text}
+        </ReactMarkdown>
       </List.Item>
     );
   }
@@ -121,11 +140,16 @@ function ChatRoom({ history }: IChatRoomProps) {
     <div className="chat-room">
       <div className="chat-messages" ref={chatRoomRef}>
         <List
-          itemLayout="horizontal"
+          itemLayout="vertical"
           dataSource={messages}
           style={{ padding: '10px', color: 'black' }}
           renderItem={renderItem}
         />
+        {loading && (
+          <div className="loading-chat">
+            <Spin size="large" />
+          </div>
+        )}
       </div>
       <div className="chat-input">
         <Input.TextArea

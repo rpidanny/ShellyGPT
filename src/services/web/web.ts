@@ -49,7 +49,7 @@ export class WebService {
         message,
         sender: Sender.User,
         collection,
-        date: new Date().toISOString(),
+        date: new Date().toUTCString(),
       });
 
       const answer = await this.dependencies.askService.askAboutCollection(
@@ -61,13 +61,13 @@ export class WebService {
         message: answer,
         sender: Sender.Shelly,
         collection,
-        date: new Date().toISOString(),
+        date: new Date().toUTCString(),
       });
 
       res.json({
         text: answer,
         sender: Sender.Shelly,
-        date: new Date().toISOString(),
+        date: new Date().toUTCString(),
       });
     });
 

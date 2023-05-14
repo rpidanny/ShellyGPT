@@ -1,21 +1,22 @@
-import { Layout, message } from 'antd';
+import { Layout, message, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 import axios from './axios';
 import ChatRoom from './components/ChatRoom/index';
 
 const { Header, Content } = Layout;
+const { Title, Text } = Typography;
 
 interface IMessage {
   text: string;
   sender: string;
-  timestamp: string;
+  date: string;
 }
 
 interface IHistory {
   message: string;
   sender: string;
-  timestamp: string;
+  date: string;
 }
 
 interface IInitResponse {
@@ -36,10 +37,10 @@ function App() {
       const { data } = await axios.get<IInitResponse>('/api/init');
       const { history, collection } = data;
       setMessages(
-        history.map(({ message, sender, timestamp }) => ({
+        history.map(({ message, sender, date }) => ({
           text: message,
           sender,
-          timestamp,
+          date,
         }))
       );
       setCollection(collection);
@@ -50,12 +51,14 @@ function App() {
   }
 
   return (
-    <Layout style={{ height: '100vh' }}>
-      <Header style={{ color: 'white' }}>Shelly ({collection})</Header>
+    <Layout style={{ height: '100vh', background: 'white' }}>
+      <Header>
+        <Title level={3} style={{ color: 'white' }}>
+          Shelly ({collection})
+        </Title>
+      </Header>
       <Content
         style={{
-          padding: '10px',
-          width: '80%',
           marginLeft: 'auto',
           marginRight: 'auto',
         }}
