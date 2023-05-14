@@ -40,7 +40,7 @@ describe('Ingest command', () => {
     });
 
     test.each`
-      verbose      | collection           | split        | chunkSize    | chunkOverlap | dryRyn
+      verbose      | collection           | split        | chunkSize    | chunkOverlap | dryRun
       ${undefined} | ${undefined}         | ${undefined} | ${undefined} | ${undefined} | ${undefined}
       ${true}      | ${'some-collection'} | ${undefined} | ${100}       | ${10}        | ${undefined}
       ${true}      | ${'some-collection'} | ${true}      | ${100}       | ${10}        | ${true}
@@ -86,8 +86,9 @@ describe('Ingest command', () => {
           chunkOverlap ?? 50,
           dryRun
         );
-        expect(stdoutSpy).toHaveBeenCalledWith(
-          expect.stringMatching('Ingested 1 documents')
+        expect(stdoutSpy).toHaveBeenNthCalledWith(
+          1,
+          expect.stringMatching('Total documents:')
         );
       }
     );
@@ -174,8 +175,9 @@ describe('Ingest command', () => {
           chunkOverlap ?? 50,
           dryRun
         );
-        expect(stdoutSpy).toHaveBeenCalledWith(
-          expect.stringMatching('Ingested 1 documents')
+        expect(stdoutSpy).toHaveBeenNthCalledWith(
+          1,
+          expect.stringMatching('Total documents')
         );
       }
     );
@@ -266,8 +268,9 @@ describe('Ingest command', () => {
           chunkOverlap ?? 50,
           dryRun
         );
-        expect(stdoutSpy).toHaveBeenCalledWith(
-          expect.stringMatching('Ingested 1 documents')
+        expect(stdoutSpy).toHaveBeenNthCalledWith(
+          1,
+          expect.stringMatching('Total documents:')
         );
       }
     );
