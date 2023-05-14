@@ -1,3 +1,15 @@
+## [1.8.0](https://github.com/rpidanny/shelly/compare/v1.7.7...v1.8.0) (2023-05-14)
+
+
+### Features
+
+* add serve command ([#33](https://github.com/rpidanny/shelly/issues/33)) ([2ea08c8](https://github.com/rpidanny/shelly/commit/2ea08c8e12fc7a4193012354cb4520b4c0d343fc))
+
+
+### Bug Fixes
+
+* release workflow ([97a2e5a](https://github.com/rpidanny/shelly/commit/97a2e5a7cae3fe5176bf32020078cc49c2b4a23e))
+
 ## [1.7.7](https://github.com/rpidanny/shelly/compare/v1.7.6...v1.7.7) (2023-05-13)
 
 
