@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+import chalk from 'chalk';
 import cors from 'cors';
 import express, { Express, Request, Response } from 'express';
 import { Server } from 'http';
@@ -23,7 +24,9 @@ export class WebService {
     this.setupRoutes(collection);
 
     this.server = this.app.listen(port, () => {
-      this.logger.log(`Server started on http://localhost:${port}`);
+      this.logger.log(
+        `Server started on ${chalk.green(`http://localhost:${port}`)}`
+      );
     });
   }
 
@@ -36,7 +39,9 @@ export class WebService {
     this.app.use(cors());
     this.app.use(express.static(path.resolve('client', 'build')));
     this.app.use((req: Request, res: any, next: () => void) => {
-      this.logger.log(`Incoming request ${req.method} ${req.url}`);
+      this.logger.log(
+        `Incoming request ${chalk.bold(req.method)} ${chalk.bold(req.url)}`
+      );
       next();
     });
   }
