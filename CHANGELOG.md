@@ -1,3 +1,17 @@
+## [1.7.7](https://github.com/rpidanny/shelly/compare/v1.7.6...v1.7.7) (2023-05-13)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/plugin-autocomplete from 2.1.9 to 2.2.0 ([#34](https://github.com/rpidanny/shelly/issues/34)) ([717a120](https://github.com/rpidanny/shelly/commit/717a1209e333a2b9e71dd1db376c7fe23d7717ac))
+
+## [1.7.6](https://github.com/rpidanny/shelly/compare/v1.7.5...v1.7.6) (2023-05-13)
+
+
+### Bug Fixes
+
+* **deps:** bump @pinecone-database/pinecone from 0.0.14 to 0.1.5 ([#35](https://github.com/rpidanny/shelly/issues/35)) ([7f1eaf2](https://github.com/rpidanny/shelly/commit/7f1eaf20139ff550bed824b54207f044021ce230))
+
 ## [1.7.5](https://github.com/rpidanny/shelly/compare/v1.7.4...v1.7.5) (2023-05-09)
 
 
