@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+import tiktoken from '@dqbd/tiktoken';
 import { Flags, ux } from '@oclif/core';
 import chalk from 'chalk';
 import { Document } from 'langchain/docstore';
@@ -138,7 +140,9 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
       );
     }
 
-    this.log(chalk.green(`Ingested ${docs.length} documents`));
+    this.log(chalk.green(`Total documents: ${chalk.bold(docs.length)}`));
+    await this.logTotalTokens(docs);
+
     return docs;
   }
 
@@ -173,5 +177,27 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
     docs = docs.concat(await ingestFn());
     ux.action.stop();
     return docs;
+  }
+
+  private async logTotalTokens(docs: Document[]) {
+    const encoder = tiktoken.get_encoding('cl100k_base');
+
+    const totalTokens = docs.reduce(
+      (acc, doc) => acc + encoder.encode(doc.pageContent).length,
+      0
+    );
+
+    // cost of text-embedding-ada-002 (0.0004 per 1k token)
+    const estimatedCost = totalTokens * (0.0004 / 1000);
+
+    this.log(
+      chalk.green(
+        `Total tokens: ${chalk.bold(totalTokens)} ${chalk.italic.gray(
+          `(estimated cost $${estimatedCost}))`
+        )}`
+      )
+    );
+
+    encoder.free();
   }
 }
