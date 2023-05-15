@@ -72,7 +72,6 @@ export class DirectoryLoader extends BaseDocumentLoader {
         if (matchedLoader) {
           const loader = matchedLoader(fullPath);
           try {
-            // console.log('Verbose:', this.verbose);
             if (this.verbose) {
               console.log(
                 `Loading ${file.name} with ${loader.constructor.name}`
