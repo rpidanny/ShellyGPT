@@ -1,11 +1,26 @@
+import { ZeroShotCoTAPEPrompt } from '@rpidanny/llm-prompt-templates';
 import { RetrievalQAChain } from 'langchain/chains';
 import { Document } from 'langchain/document';
+import { PromptTemplate } from 'langchain/prompts';
 import path from 'path';
 
 import { IAskServiceDependencies } from './interfaces.js';
 
 export class AskService {
-  constructor(private readonly dependencies: IAskServiceDependencies) {}
+  questionTemplate: PromptTemplate;
+
+  constructor(private readonly dependencies: IAskServiceDependencies) {
+    this.questionTemplate = new PromptTemplate({
+      template: ZeroShotCoTAPEPrompt.content,
+      inputVariables: ['question'],
+    });
+  }
+
+  async askQuestion(question: string): Promise<string> {
+    return this.dependencies.llm.call(
+      await this.questionTemplate.format({ question })
+    );
+  }
 
   async askAboutCollection(
     question: string,
