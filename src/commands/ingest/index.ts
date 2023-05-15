@@ -1,15 +1,15 @@
 /* eslint-disable camelcase */
 import tiktoken, { TiktokenEncoding } from '@dqbd/tiktoken';
-import models from '@dqbd/tiktoken/model_to_encoding.json';
 import { Flags, ux } from '@oclif/core';
 import chalk from 'chalk';
 import { Document } from 'langchain/docstore';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 
 import { BaseCommand } from '../../baseCommand.js';
-import { DataLoaderService } from '../../services/data-loader/data-loader.service.js';
+import { DataLoaderService } from '../../services/data-loader/data-loader.js';
 import { IngestService } from '../../services/ingest/ingest.js';
 import { VectorStoreService } from '../../services/vector-store/vector-store.service.js';
+import { TikTokenModelMapping } from '../../utils/tiktoken.js';
 
 export default class Ingest extends BaseCommand<typeof Ingest> {
   static description = 'Ingest directory to a vector store';
@@ -188,7 +188,7 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
 
   private async logTotalTokens(docs: Document[], llmModelName: string) {
     const encoder = tiktoken.get_encoding(
-      (models as { [model: string]: string })[llmModelName] as TiktokenEncoding
+      TikTokenModelMapping[llmModelName] as TiktokenEncoding
     );
 
     const totalTokens = docs.reduce(
