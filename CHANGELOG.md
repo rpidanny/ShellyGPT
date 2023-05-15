@@ -1,3 +1,10 @@
+## [1.12.0](https://github.com/rpidanny/shelly/compare/v1.11.1...v1.12.0) (2023-05-15)
+
+
+### Features
+
+* use TextLoader as default loader for unsupported extensions ([#49](https://github.com/rpidanny/shelly/issues/49)) ([9870802](https://github.com/rpidanny/shelly/commit/98708025d8605386dbfc178d862446eb73e72848))
+
 ## [1.11.1](https://github.com/rpidanny/shelly/compare/v1.11.0...v1.11.1) (2023-05-15)
 
 
