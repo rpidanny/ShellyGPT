@@ -2,7 +2,7 @@
 import { get_encoding, Tiktoken } from '@dqbd/tiktoken';
 import { Document } from 'langchain/document';
 
-import { OpenAIChatModel } from '../../local_tests/factories/llm/enums';
+import { OpenAIChatModel } from '../../src/config/enums.js';
 import { DataLoaderService } from '../../src/services/data-loader/data-loader.service.js';
 
 describe('DataLoaderService', () => {
