@@ -53,16 +53,26 @@ export default class Ask extends BaseCommand<typeof Ask> {
   }
 
   async getAskService(verbose: boolean): Promise<AskService> {
-    const llm = new OpenAIChat({
-      openAIApiKey: this.localConfig.openAi.apiKey,
-      modelName: this.localConfig.openAi.chatModel,
-      verbose,
-    });
-    const embeddings = new OpenAIEmbeddings({
-      openAIApiKey: this.localConfig.openAi.apiKey,
-      modelName: this.localConfig.openAi.embeddingsModel,
-      verbose,
-    });
+    const llm = new OpenAIChat(
+      {
+        openAIApiKey: this.localConfig.openAi.apiKey,
+        modelName: this.localConfig.openAi.chatModel,
+        verbose,
+      },
+      {
+        basePath: process.env.OPENAI_API_BASE,
+      }
+    );
+    const embeddings = new OpenAIEmbeddings(
+      {
+        openAIApiKey: this.localConfig.openAi.apiKey,
+        modelName: this.localConfig.openAi.embeddingsModel,
+        verbose,
+      },
+      {
+        basePath: process.env.OPENAI_API_BASE,
+      }
+    );
     const vectorStoreService = new VectorStoreService(this.localConfig);
     return new AskService({ vectorStoreService, llm, embeddings });
   }

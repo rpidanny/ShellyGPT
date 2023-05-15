@@ -156,11 +156,16 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
   ): Promise<IngestService> {
     const vectorStoreService = new VectorStoreService(this.localConfig);
     const dataLoaderService = new DataLoaderService(llmModelName);
-    const embeddings = new OpenAIEmbeddings({
-      openAIApiKey: this.localConfig.openAi.apiKey,
-      modelName: this.localConfig.openAi.embeddingsModel,
-      verbose,
-    });
+    const embeddings = new OpenAIEmbeddings(
+      {
+        openAIApiKey: this.localConfig.openAi.apiKey,
+        modelName: this.localConfig.openAi.embeddingsModel,
+        verbose,
+      },
+      {
+        basePath: process.env.OPENAI_API_BASE,
+      }
+    );
 
     return new IngestService({
       dataLoaderService,
