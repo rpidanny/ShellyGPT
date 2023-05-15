@@ -2,6 +2,7 @@
 import { get_encoding, Tiktoken } from '@dqbd/tiktoken';
 import { Document } from 'langchain/document';
 
+import { OpenAIChatModel } from '../../local_tests/factories/llm/enums';
 import { DataLoaderService } from '../../src/services/data-loader/data-loader.service.js';
 
 describe('DataLoaderService', () => {
@@ -23,8 +24,14 @@ describe('DataLoaderService', () => {
   });
 
   beforeEach(() => {
-    dataLoaderService = new DataLoaderService();
+    dataLoaderService = new DataLoaderService(OpenAIChatModel.GPT_3_5_TURBO);
     encoding = get_encoding('cl100k_base');
+  });
+
+  it('should throw error when model is not supported', () => {
+    expect(() => {
+      new DataLoaderService('unsupported_model');
+    }).toThrowError('Model unsupported_model is not supported');
   });
 
   describe('loadDirectory', () => {

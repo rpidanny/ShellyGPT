@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-import tiktoken from '@dqbd/tiktoken';
+import tiktoken, { TiktokenEncoding } from '@dqbd/tiktoken';
+import models from '@dqbd/tiktoken/model_to_encoding.json';
 import { Flags, ux } from '@oclif/core';
 import chalk from 'chalk';
 import { Document } from 'langchain/docstore';
@@ -90,7 +91,10 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
       githubBranch,
     } = this.flags;
 
-    const service = await this.getIngestService(verbose);
+    const service = await this.getIngestService(
+      verbose,
+      this.localConfig.openAi.chatModel
+    );
     const dest = `${this.localConfig.vectorStore}/${collection}`;
 
     let docs: Document[] = [];
@@ -141,14 +145,17 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
     }
 
     this.log(chalk.green(`Total documents: ${chalk.bold(docs.length)}`));
-    await this.logTotalTokens(docs);
+    await this.logTotalTokens(docs, this.localConfig.openAi.chatModel);
 
     return docs;
   }
 
-  async getIngestService(verbose: boolean): Promise<IngestService> {
+  async getIngestService(
+    verbose: boolean,
+    llmModelName: string
+  ): Promise<IngestService> {
     const vectorStoreService = new VectorStoreService(this.localConfig);
-    const dataLoaderService = new DataLoaderService();
+    const dataLoaderService = new DataLoaderService(llmModelName);
     const embeddings = new OpenAIEmbeddings({
       openAIApiKey: this.localConfig.openAi.apiKey,
       modelName: this.localConfig.openAi.embeddingsModel,
@@ -179,8 +186,10 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
     return docs;
   }
 
-  private async logTotalTokens(docs: Document[]) {
-    const encoder = tiktoken.get_encoding('cl100k_base');
+  private async logTotalTokens(docs: Document[], llmModelName: string) {
+    const encoder = tiktoken.get_encoding(
+      (models as { [model: string]: string })[llmModelName] as TiktokenEncoding
+    );
 
     const totalTokens = docs.reduce(
       (acc, doc) => acc + encoder.encode(doc.pageContent).length,

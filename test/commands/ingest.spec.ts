@@ -2,6 +2,7 @@ import { mock } from 'jest-mock-extended';
 import { Document } from 'langchain/document';
 
 import Ingest from '../../src/commands/ingest/index.js';
+import { OpenAIChatModel } from '../../src/config/enums.js';
 import { IngestService } from '../../src/services/ingest';
 import { getMockConfig } from '../fixtures/config';
 
@@ -76,7 +77,10 @@ describe('Ingest command', () => {
 
         expect(answer).toEqual(docs);
         expect(Ingest.prototype.getIngestService).toHaveBeenCalledTimes(1);
-        expect(Ingest.prototype.getIngestService).toHaveBeenCalledWith(verbose);
+        expect(Ingest.prototype.getIngestService).toHaveBeenCalledWith(
+          verbose,
+          OpenAIChatModel.GPT_3_5_TURBO
+        );
         expect(mockIngestService.ingestFile).toHaveBeenCalledTimes(1);
         expect(mockIngestService.ingestFile).toHaveBeenCalledWith(
           filePath,
@@ -165,7 +169,10 @@ describe('Ingest command', () => {
 
         expect(answer).toEqual(docs);
         expect(Ingest.prototype.getIngestService).toHaveBeenCalledTimes(1);
-        expect(Ingest.prototype.getIngestService).toHaveBeenCalledWith(verbose);
+        expect(Ingest.prototype.getIngestService).toHaveBeenCalledWith(
+          verbose,
+          OpenAIChatModel.GPT_3_5_TURBO
+        );
         expect(mockIngestService.ingestDirectory).toHaveBeenCalledTimes(1);
         expect(mockIngestService.ingestDirectory).toHaveBeenCalledWith(
           dir,
@@ -257,7 +264,10 @@ describe('Ingest command', () => {
 
         expect(answer).toEqual(docs);
         expect(Ingest.prototype.getIngestService).toHaveBeenCalledTimes(1);
-        expect(Ingest.prototype.getIngestService).toHaveBeenCalledWith(verbose);
+        expect(Ingest.prototype.getIngestService).toHaveBeenCalledWith(
+          verbose,
+          OpenAIChatModel.GPT_3_5_TURBO
+        );
         expect(mockIngestService.ingestGitHubRepo).toHaveBeenCalledTimes(1);
         expect(mockIngestService.ingestGitHubRepo).toHaveBeenCalledWith(
           repo,
@@ -309,7 +319,10 @@ describe('Ingest command', () => {
       const ingestCommand = new Ingest(args, mockConfig);
       await ingestCommand.init();
 
-      const service = await ingestCommand.getIngestService(false);
+      const service = await ingestCommand.getIngestService(
+        false,
+        OpenAIChatModel.GPT_3_5_TURBO
+      );
 
       expect(service).toBeInstanceOf(IngestService);
     });
