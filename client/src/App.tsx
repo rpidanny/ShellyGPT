@@ -5,7 +5,7 @@ import axios from './axios';
 import ChatRoom from './components/ChatRoom/index';
 
 const { Header, Content } = Layout;
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 interface IMessage {
   text: string;

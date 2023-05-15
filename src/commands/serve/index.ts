@@ -71,10 +71,10 @@ export default class Serve extends BaseCommand<typeof Serve> {
         openAIApiKey: this.localConfig.openAi.apiKey,
         modelName: this.localConfig.openAi.embeddingsModel,
         verbose,
-      },
-      {
-        basePath: process.env.OPENAI_API_BASE,
       }
+      // {
+      //   basePath: process.env.OPENAI_API_BASE,
+      // }
     );
     const vectorStoreService = new VectorStoreService(this.localConfig);
     return new AskService({ vectorStoreService, llm, embeddings });

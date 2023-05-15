@@ -1,7 +1,7 @@
 import './styles.css';
 
 import { SendOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Input, List, message, Spin, Typography } from 'antd';
+import { Avatar, Input, List, message, Spin } from 'antd';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -10,7 +10,6 @@ import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import sheldon from '../../assets/sheldon_mid.png';
 import axios from '../../axios';
 
-const { Text } = Typography;
 interface IMessage {
   text: string;
   sender: string;
@@ -27,9 +26,6 @@ function ChatRoom({ history }: IChatRoomProps): JSX.Element {
   const [newMessage, setNewMessage] = useState<string>('');
   const chatRoomRef = useRef<HTMLDivElement>(null);
   const messageInputRef = useRef<HTMLTextAreaElement>(null);
-
-  // const { setLoading } = useContext<ILoadingContextType>(LoadingContext);
-  console.log('History: ', history);
 
   useEffect(() => {
     setMessages(history);
@@ -89,10 +85,7 @@ function ChatRoom({ history }: IChatRoomProps): JSX.Element {
 
   function renderItem({ text, sender, date }: IMessage): JSX.Element {
     return (
-      <List.Item
-        className="message-bubble"
-        // style={{ backgroundColor: sender === 'user' ? '#eeeeee' : 'white' }}
-      >
+      <List.Item className="message-bubble">
         <List.Item.Meta
           avatar={
             sender === 'user' ? (
