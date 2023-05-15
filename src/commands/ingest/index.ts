@@ -155,7 +155,7 @@ export default class Ingest extends BaseCommand<typeof Ingest> {
     llmModelName: string
   ): Promise<IngestService> {
     const vectorStoreService = new VectorStoreService(this.localConfig);
-    const dataLoaderService = new DataLoaderService(llmModelName);
+    const dataLoaderService = new DataLoaderService(llmModelName, verbose);
     const embeddings = new OpenAIEmbeddings(
       {
         openAIApiKey: this.localConfig.openAi.apiKey,

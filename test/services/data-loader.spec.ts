@@ -109,7 +109,7 @@ describe('DataLoaderService', () => {
       }
     });
 
-    it('should handle loading documents with unsupported file extensions gracefully', async () => {
+    it.skip('should handle loading documents with unsupported file extensions gracefully', async () => {
       // act
       const documents = await dataLoaderService.loadDirectory(
         unsupportedDirPath

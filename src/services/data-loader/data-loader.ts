@@ -3,7 +3,6 @@ import fs from 'fs-extra';
 import { Document } from 'langchain/document';
 import { BaseDocumentLoader } from 'langchain/document_loaders';
 import { CSVLoader } from 'langchain/document_loaders/fs/csv';
-import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 import { DocxLoader } from 'langchain/document_loaders/fs/docx';
 import { EPubLoader } from 'langchain/document_loaders/fs/epub';
 import { JSONLoader } from 'langchain/document_loaders/fs/json';
@@ -14,10 +13,14 @@ import { GithubRepoLoader } from 'langchain/document_loaders/web/github';
 import { TokenTextSplitter } from 'langchain/text_splitter';
 import path from 'path';
 
+import { DirectoryLoader } from '../../utils/loaders/directory.loader.js';
 import { TikTokenModelMapping } from '../../utils/tiktoken.js';
 
 export class DataLoaderService {
-  constructor(private readonly llmModelName: string) {
+  constructor(
+    private readonly llmModelName: string,
+    private readonly verbose: boolean = false
+  ) {
     if (!(llmModelName in TikTokenModelMapping)) {
       throw new Error(`Model ${llmModelName} is not supported`);
     }
@@ -38,6 +41,7 @@ export class DataLoaderService {
     '.epub': (path: string) => new EPubLoader(path),
     '.pdf': (path: string) => new PDFLoader(path),
     '.srt': (path: string) => new SRTLoader(path),
+    '.*': (path: string) => new TextLoader(path),
   };
 
   async loadDirectory(
@@ -50,7 +54,8 @@ export class DataLoaderService {
       dirPath,
       this.extensionsMap,
       true,
-      'warn'
+      'warn',
+      this.verbose
     );
 
     const docs = await loader.load();
