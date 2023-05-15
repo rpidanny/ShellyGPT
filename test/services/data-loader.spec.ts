@@ -3,7 +3,7 @@ import { get_encoding, Tiktoken } from '@dqbd/tiktoken';
 import { Document } from 'langchain/document';
 
 import { OpenAIChatModel } from '../../src/config/enums.js';
-import { DataLoaderService } from '../../src/services/data-loader/data-loader.service.js';
+import { DataLoaderService } from '../../src/services/data-loader/data-loader.js';
 
 describe('DataLoaderService', () => {
   const rootPath = './test/data';

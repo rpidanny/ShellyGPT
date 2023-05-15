@@ -1,5 +1,4 @@
 import { TiktokenEncoding } from '@dqbd/tiktoken';
-import models from '@dqbd/tiktoken/model_to_encoding.json';
 import fs from 'fs-extra';
 import { Document } from 'langchain/document';
 import { BaseDocumentLoader } from 'langchain/document_loaders';
@@ -15,9 +14,11 @@ import { GithubRepoLoader } from 'langchain/document_loaders/web/github';
 import { TokenTextSplitter } from 'langchain/text_splitter';
 import path from 'path';
 
+import { TikTokenModelMapping } from '../../utils/tiktoken.js';
+
 export class DataLoaderService {
   constructor(private readonly llmModelName: string) {
-    if (!(llmModelName in models)) {
+    if (!(llmModelName in TikTokenModelMapping)) {
       throw new Error(`Model ${llmModelName} is not supported`);
     }
   }
@@ -111,9 +112,7 @@ export class DataLoaderService {
     chunkOverlap: number
   ): Promise<Document[]> {
     const splitter = new TokenTextSplitter({
-      encodingName: (models as { [model: string]: string })[
-        this.llmModelName
-      ] as TiktokenEncoding,
+      encodingName: TikTokenModelMapping[this.llmModelName] as TiktokenEncoding,
       chunkSize,
       chunkOverlap,
     });
