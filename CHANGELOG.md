@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/rpidanny/shelly/compare/v1.11.0...v1.11.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* handle missing history for new collections ([a5c20c6](https://github.com/rpidanny/shelly/commit/a5c20c6ca844ea6bb5d551b4c98c2b10a66d0081))
+
 ## [1.11.0](https://github.com/rpidanny/shelly/compare/v1.10.2...v1.11.0) (2023-05-15)
 
 
