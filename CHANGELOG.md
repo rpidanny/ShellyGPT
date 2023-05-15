@@ -1,3 +1,10 @@
+## [1.13.0](https://github.com/rpidanny/shelly/compare/v1.12.0...v1.13.0) (2023-05-15)
+
+
+### Features
+
+* add option to ask normal questions without vector QA ([#50](https://github.com/rpidanny/shelly/issues/50)) ([4295076](https://github.com/rpidanny/shelly/commit/4295076a9998e72e4d2e220128f5ee4c2630d785))
+
 ## [1.12.0](https://github.com/rpidanny/shelly/compare/v1.11.1...v1.12.0) (2023-05-15)
 
 
