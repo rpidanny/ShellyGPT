@@ -65,5 +65,13 @@ describe('HistoryService', () => {
 
       expect(result).toEqual([msg, msg]);
     });
+
+    it("should return empty array when history doesn't exist and not fail", async () => {
+      const historyFilePath = '/home/some/random/path';
+
+      const service = new HistoryService(historyFilePath);
+
+      await expect(service.getHistory('test')).resolves.toEqual([]);
+    });
   });
 });

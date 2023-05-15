@@ -58,25 +58,4 @@ describe('Commands - history:get', () => {
       expect.any(Function)
     );
   });
-
-  it('should print a message if no history file is found', async () => {
-    mockConfig.dataDir = '/foo/bar';
-
-    jest.spyOn(uiOutput, 'printChatMessage').mockImplementation();
-
-    // Run the command
-    const historyCommand = new History(
-      ['--collection', mockFlags.collection],
-      mockConfig
-    );
-    jest.spyOn(historyCommand, 'log').mockImplementation();
-    await historyCommand.init();
-
-    await expect(historyCommand.run()).resolves.toBeUndefined();
-
-    expect(uiOutput.printChatMessage).not.toHaveBeenCalled();
-    expect(historyCommand.log).toHaveBeenCalledWith(
-      'No history for this collection.'
-    );
-  });
 });

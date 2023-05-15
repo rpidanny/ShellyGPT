@@ -35,7 +35,7 @@ export default class History extends BaseCommand<typeof History> {
         uiOutput.printChatMessage(line, (msg) => this.log(msg));
       }
     } catch (err) {
-      this.log(`No history for this collection.`);
+      this.error(`Failed to get history: ${err}`);
     }
   }
 

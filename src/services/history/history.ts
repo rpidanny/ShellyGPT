@@ -26,6 +26,8 @@ export class HistoryService {
       `${collection}.jsonl`
     );
 
+    if (!(await fs.pathExists(historyFilePath))) return [];
+
     const lines = await fs.readFile(historyFilePath, 'utf-8');
 
     for (const line of lines.split('\n')) {
