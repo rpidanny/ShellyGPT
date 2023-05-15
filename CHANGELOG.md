@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/rpidanny/shelly/compare/v1.10.1...v1.10.2) (2023-05-15)
+
+
+### Bug Fixes
+
+* tiktoken import error ([#47](https://github.com/rpidanny/shelly/issues/47)) ([4a98b65](https://github.com/rpidanny/shelly/commit/4a98b6567e3bb2008a6daf3f22f1c57f06f02f72))
+
 ## [1.10.1](https://github.com/rpidanny/shelly/compare/v1.10.0...v1.10.1) (2023-05-15)
 
 
