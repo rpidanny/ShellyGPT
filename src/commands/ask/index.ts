@@ -11,6 +11,7 @@ export default class Ask extends BaseCommand<typeof Ask> {
   static description = 'Ask questions or instruct shelly to do something.';
 
   static examples = [
+    '<%= config.bin %> <%= command.id %> "How do i list all files in a directory?"',
     '<%= config.bin %> <%= command.id %> --collection=foo "how do i do something?"',
   ];
 
@@ -21,8 +22,9 @@ export default class Ask extends BaseCommand<typeof Ask> {
     }),
     collection: Flags.string({
       char: 'c',
-      description: 'vector collection to use',
-      default: 'ShellyDefault',
+      description:
+        'vector collection to use. If not specified, ignores vector search and performs normal QA without context.',
+      required: false,
     }),
   };
 
@@ -37,17 +39,23 @@ export default class Ask extends BaseCommand<typeof Ask> {
     const { collection, verbose } = this.flags;
     const { question } = this.args;
 
-    await this.emitMessageEvent(question, collection, Sender.User);
+    await this.emitMessageEvent(question, Sender.User, collection);
 
     ux.action.start('running');
 
     const shelly = await this.getAskService(verbose);
 
-    const answer = await shelly.askAboutCollection(question, collection);
+    let answer;
+
+    if (collection) {
+      answer = await shelly.askAboutCollection(question, collection);
+    } else {
+      answer = await shelly.askQuestion(question);
+    }
 
     ux.action.stop();
 
-    await this.emitMessageEvent(answer, collection, Sender.Shelly);
+    await this.emitMessageEvent(answer, Sender.Shelly, collection);
 
     return answer;
   }
@@ -79,14 +87,14 @@ export default class Ask extends BaseCommand<typeof Ask> {
 
   private async emitMessageEvent(
     message: string,
-    collection: string,
-    sender: string
+    sender: string,
+    collection?: string
   ) {
     await this.config.runHook('chat', {
       chat: {
         date: new Date().toUTCString(),
         message,
-        collection,
+        collection: collection || 'default',
         sender,
       },
     });
