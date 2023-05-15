@@ -30,4 +30,4 @@ EXAMPLES
   $ shelly serve
 ```
 
-_See code: [dist/commands/serve/index.ts](https://github.com/rpidanny/shelly/blob/v1.10.2/dist/commands/serve/index.ts)_
+_See code: [dist/commands/serve/index.ts](https://github.com/rpidanny/shelly/blob/v1.11.0/dist/commands/serve/index.ts)_

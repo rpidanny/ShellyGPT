@@ -1,3 +1,10 @@
+## [1.11.0](https://github.com/rpidanny/shelly/compare/v1.10.2...v1.11.0) (2023-05-15)
+
+
+### Features
+
+* add sources citation in response ([#48](https://github.com/rpidanny/shelly/issues/48)) ([45c691e](https://github.com/rpidanny/shelly/commit/45c691e8ed1084a4c80b84531e3d498e9fd11313))
+
 ## [1.10.2](https://github.com/rpidanny/shelly/compare/v1.10.1...v1.10.2) (2023-05-15)
 
 
