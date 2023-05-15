@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/rpidanny/shelly/compare/v1.10.0...v1.10.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* static tiktoken model ([#45](https://github.com/rpidanny/shelly/issues/45)) ([d96acaa](https://github.com/rpidanny/shelly/commit/d96acaaf193fcb070b7c80a52f0ee00778283318))
+
 ## [1.10.0](https://github.com/rpidanny/shelly/compare/v1.9.1...v1.10.0) (2023-05-14)
 
 

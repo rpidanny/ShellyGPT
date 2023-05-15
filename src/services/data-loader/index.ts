@@ -1,1 +1,1 @@
-export * from './data-loader.service.js';
+export * from './data-loader.js';

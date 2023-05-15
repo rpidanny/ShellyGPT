@@ -2,7 +2,7 @@ import { mock } from 'jest-mock-extended';
 import { Document } from 'langchain/document';
 import { Embeddings } from 'langchain/embeddings';
 
-import { DataLoaderService } from '../../src/services/data-loader/data-loader.service';
+import { DataLoaderService } from '../../src/services/data-loader/data-loader';
 import {
   IIngestServiceDependencies,
   IngestService,

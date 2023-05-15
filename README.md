@@ -88,7 +88,7 @@ $ npm install -g @rpidanny/shelly
 $ shelly COMMAND
 running command...
 $ shelly (--version)
-@rpidanny/shelly/1.10.0 linux-x64 node-v18.16.0
+@rpidanny/shelly/1.10.1 linux-x64 node-v18.16.0
 $ shelly --help [COMMAND]
 USAGE
   $ shelly COMMAND
@@ -104,7 +104,6 @@ USAGE
 * [`shelly events`](docs/events.md) - Create iCal events
 * [`shelly help`](docs/help.md) - Display help for shelly.
 * [`shelly history`](docs/history.md) - Print history
-* [`shelly ingest`](docs/ingest.md) - Ingest directory to a vector store
 * [`shelly milvus`](docs/milvus.md) - Start local Milvus vector store
 * [`shelly serve`](docs/serve.md) - start the Shelly web service
 
