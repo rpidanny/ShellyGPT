@@ -5,7 +5,7 @@ Shelly :robot:
   <img src="sheldon_mid.png" height="200">
 </p>
 
-Welcome to Shelly - the coolest CLI tool around! Ingesting data and generating instant answers using ChatGPT, Shelly provides you with the Sheldon Cooper you never had at your fingertips.
+Welcome to Shelly - the coolest CLI tool around! Ingesting documents and generating instant answers to questions about those documents using ChatGPT, Shelly provides you with the Sheldon Cooper you never had at your fingertips.
 
 <!-- toc -->
 * [What is Shelly?](#what-is-shelly)
@@ -15,13 +15,12 @@ Welcome to Shelly - the coolest CLI tool around! Ingesting data and generating i
 * [Configuration](#configuration)
 * [Usage](#usage)
 * [Command Topics](#command-topics)
-* [Credits](#credits)
 * [License](#license)
 <!-- tocstop -->
 
 # What is Shelly?
 
-Shelly is a command-line tool that ingests data into a vector store and generates instant answers to your questions using ChatGPT. Inspired by the iconic character of Sheldon Cooper from The Big Bang Theory, Shelly brings a fun and quirky vibe to your command-line experience.
+Shelly is a command-line tool that ingests documents into a vector store and generates instant answers to your questions about those documents using ChatGPT. Inspired by the iconic character of Sheldon Cooper from The Big Bang Theory, Shelly brings a fun and quirky vibe to your command-line experience.
 
 With Shelly, you can have the genius mind of Sheldon Cooper at your fingertips, answering all your queries with its powerful GPT-based algorithms. Gone are the days of tirelessly searching for answers, as Shelly provides you with accurate solutions using its advanced machine learning technology.
 
@@ -37,13 +36,8 @@ https://user-images.githubusercontent.com/6696862/235344589-c7eaad37-049e-4b63-a
 
 # Features
 
-- [x] Ingest data into a vector store
-- [x] Generate instant answers to your questions using ChatGPT
-
-## Roadmap
-
-- [ ] Save interaction history
-- [ ] Web portal
+- [x] Ingest documents and allows answering questions about those documents
+- [x] Web UI
 
 # Installation
 
@@ -109,10 +103,6 @@ USAGE
 * [`shelly serve`](docs/serve.md) - start the Shelly web service
 
 <!-- commandsstop -->
-
-# Credits
-
-Shelly was created by [rpidanny](https://github.com/rpidanny) and is inspired by the iconic character of Sheldon Cooper from The Big Bang Theory.
 
 # License
 
