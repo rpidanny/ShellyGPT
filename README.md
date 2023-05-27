@@ -104,6 +104,13 @@ USAGE
 
 <!-- commandsstop -->
 
+# Data Collection and Analytics
+
+This CLI app only collects essential data for analytics purposes to improve user experience. The information collected includes:
+
+- User's operating system (OS) details (e.g., version, architecture, type)
+- Id of the command used.
+
 # License
 
 Shelly is released under the MIT License. See the [LICENSE](LICENSE) file for details.
