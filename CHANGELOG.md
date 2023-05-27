@@ -1,3 +1,10 @@
+## [1.14.0](https://github.com/rpidanny/shelly/compare/v1.13.1...v1.14.0) (2023-05-27)
+
+
+### Features
+
+* add command analytics ([#56](https://github.com/rpidanny/shelly/issues/56)) ([43f3777](https://github.com/rpidanny/shelly/commit/43f3777d972ab1b9f54d5b7a928da7a63b7851d4))
+
 ## [1.13.1](https://github.com/rpidanny/shelly/compare/v1.13.0...v1.13.1) (2023-05-20)
 
 ## [1.13.0](https://github.com/rpidanny/shelly/compare/v1.12.0...v1.13.0) (2023-05-15)
