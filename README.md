@@ -109,6 +109,7 @@ USAGE
 This CLI app only collects essential data for analytics purposes to improve user experience. The information collected includes:
 
 - User's operating system (OS) details (e.g., version, architecture, type)
+- App metadata (e.g version, name)
 - Id of the command used.
 
 # License
