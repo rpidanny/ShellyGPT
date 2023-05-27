@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/rpidanny/shelly/compare/v1.14.0...v1.14.1) (2023-05-27)
+
+
+### Bug Fixes
+
+* **deps:** bump marked-terminal from 5.1.1 to 5.2.0 ([#53](https://github.com/rpidanny/shelly/issues/53)) ([991ebac](https://github.com/rpidanny/shelly/commit/991ebac353e44cfa738baeb9c2812c8e716990e5))
+
 ## [1.14.0](https://github.com/rpidanny/shelly/compare/v1.13.1...v1.14.0) (2023-05-27)
 
 

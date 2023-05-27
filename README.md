@@ -83,7 +83,7 @@ $ npm install -g @rpidanny/shelly
 $ shelly COMMAND
 running command...
 $ shelly (--version)
-@rpidanny/shelly/1.14.0 linux-x64 node-v18.16.0
+@rpidanny/shelly/1.14.1 linux-x64 node-v18.16.0
 $ shelly --help [COMMAND]
 USAGE
   $ shelly COMMAND
