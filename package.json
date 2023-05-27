@@ -52,7 +52,7 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-not-found": "^2.3.23",
     "@oclif/plugin-plugins": "^2.4.6",
-    "@pinecone-database/pinecone": "^0.1.5",
+    "@pinecone-database/pinecone": "^0.1.6",
     "@rpidanny/llm-prompt-templates": "^1.2.0",
     "@zilliz/milvus2-sdk-node": "^2.2.10",
     "chalk": "^4.1.2",
