@@ -79,7 +79,7 @@
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.3",
     "@oclif/config": "^1.18.8",
-    "@oclif/test": "^2.3.16",
+    "@oclif/test": "^2.3.21",
     "@rpidanny/eslint-config-typescript": "^1.1.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^9.0.2",
