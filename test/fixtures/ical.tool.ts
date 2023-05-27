@@ -17,9 +17,9 @@ For example, the example "JSON Schema" instance {{"properties": {{"foo": {{"desc
 would match an object with one required property, "foo". The "type" property specifies "foo" must be an "array", and the "description" property semantically describes it as "a list of test words". The items within "foo" must be strings.
 Thus, the object {{"foo": ["bar", "baz"]}} is a well-formatted instance of this example "JSON Schema". The object {{"properties": {{"foo": ["bar", "baz"]}}}} is not well-formatted.
 
-Your output will be parsed and type-checked according to the provided schema instance, so make sure all fields in your output match exactly!
+Your output will be parsed and type-checked according to the provided schema instance, so make sure all fields in your output match the schema exactly and there are no trailing commas!
 
-Here is the JSON Schema instance your output must adhere to:
+Here is the JSON Schema instance your output must adhere to. Include the enclosing markdown codeblock:
 \`\`\`json
 {"type":"object","properties":{"name":{"type":"string","description":"Name of the event event"},"events":{"type":"array","items":{"type":"object","properties":{"start":{"type":"string","description":"Start date of the event"},"end":{"type":"string","description":"Env date of the event"},"summary":{"type":"string","description":"Summary of the event"},"description":{"type":"string","description":"Description of the event"},"location":{"type":"string","description":"Location of the event if any"},"url":{"type":"string","description":"URL of the event if any"}},"required":["start","end","summary","description"],"additionalProperties":false}}},"required":["name","events"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}
 \`\`\`
