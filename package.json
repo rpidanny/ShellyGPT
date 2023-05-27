@@ -1,6 +1,6 @@
 {
   "name": "@rpidanny/shelly",
-  "version": "1.13.1",
+  "version": "1.14.0",
   "description": "A command-line tool that ingests data and generates instant answers using ChatGPT, giving you the Sheldon Cooper you never had at your fingertips.",
   "author": "rpidanny @rpidanny",
   "type": "module",
@@ -69,6 +69,7 @@
     "mammoth": "^1.5.1",
     "marked": "^4.3.0",
     "marked-terminal": "^5.1.1",
+    "mixpanel": "^0.17.0",
     "pdf-parse": "^1.1.1",
     "pdf-parser": "^1.0.5",
     "srt-parser-2": "^1.2.2",
@@ -136,7 +137,8 @@
     "hooks": {
       "init": [
         "./dist/hooks/init/config",
-        "./dist/hooks/init/banner"
+        "./dist/hooks/init/banner",
+        "./dist/hooks/init/analytics"
       ],
       "chat": [
         "./dist/hooks/chat/store",

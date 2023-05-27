@@ -15,6 +15,7 @@ Welcome to Shelly - the coolest CLI tool around! Ingesting documents and generat
 * [Configuration](#configuration)
 * [Usage](#usage)
 * [Command Topics](#command-topics)
+* [Data Collection and Analytics](#data-collection-and-analytics)
 * [License](#license)
 <!-- tocstop -->
 
@@ -82,7 +83,7 @@ $ npm install -g @rpidanny/shelly
 $ shelly COMMAND
 running command...
 $ shelly (--version)
-@rpidanny/shelly/1.13.1 linux-x64 node-v18.16.0
+@rpidanny/shelly/1.14.0 linux-x64 node-v18.16.0
 $ shelly --help [COMMAND]
 USAGE
   $ shelly COMMAND
@@ -103,6 +104,14 @@ USAGE
 * [`shelly serve`](docs/serve.md) - start the Shelly web service
 
 <!-- commandsstop -->
+
+# Data Collection and Analytics
+
+This CLI app only collects essential data for analytics purposes to improve user experience. The information collected includes:
+
+- User's operating system (OS) details (e.g., version, architecture, type)
+- App metadata (e.g version, name)
+- Id of the command used.
 
 # License
 

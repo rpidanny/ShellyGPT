@@ -35,4 +35,4 @@ EXAMPLES
   $ shelly ask --collection=foo "how do i do something?"
 ```
 
-_See code: [dist/commands/ask/index.ts](https://github.com/rpidanny/shelly/blob/v1.13.1/dist/commands/ask/index.ts)_
+_See code: [dist/commands/ask/index.ts](https://github.com/rpidanny/shelly/blob/v1.14.0/dist/commands/ask/index.ts)_
